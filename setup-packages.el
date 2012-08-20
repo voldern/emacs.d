@@ -1,5 +1,5 @@
 (setq package-list '(php-mode php+-mode multi-web-mode haml-mode yaml-mode magit
-                              flymake-php flymake-ruby ace-jump-mode))
+                              flymake-php flymake-ruby ace-jump-mode twilight-theme))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages")

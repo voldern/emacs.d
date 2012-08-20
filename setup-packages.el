@@ -1,4 +1,4 @@
-(setq package-list '(php-mode php+-mode multi-web-mode haml-mode yaml-mode magit
+(setq package-list '(php-mode multi-web-mode haml-mode yaml-mode magit
                               flymake-php flymake-ruby ace-jump-mode))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")

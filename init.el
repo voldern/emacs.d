@@ -39,6 +39,9 @@
 ;; enable column-number-mode
 (column-number-mode t)
 
+;; enable narrow view
+(put 'narrow-to-region 'disabled nil)
+
 ;; Ido
 (ido-mode t)
 (setq ido-enable-prefix nil
@@ -81,6 +84,13 @@
 ;; ;; PHP-mode
 ;; (add-to-list 'auto-mode-alist '("\\.php" . php+-mode))
 
+;; Javascript
+(add-to-list 'auto-mode-alist '(".js$" . js2-mode))
+
+;; Undo tree
+(require 'undo-tree)
+(global-undo-tree-mode)
+
 ;; After elpa load
 (defun my-after-init ()
   (require 'twilight-theme))
@@ -92,8 +102,65 @@
                                         (match-end 1) "f")
                         nil)))))
 
+;; Flycheck
+(add-hook 'find-file-hook 'flycheck-mode)
+
+;; SVN
+(autoload 'svn-status "dsvn" "Run `svn status'." t)
+(autoload 'svn-update "dsvn" "Run `svn update'." t)
+(require 'vc-svn)
+
+;; Smex
+(global-set-key [(meta x)] (lambda ()
+                             (interactive)
+                             (or (boundp 'smex-cache)
+                                 (smex-initialize))
+                             (global-set-key [(meta x)] 'smex)
+                             (smex)))
+
+(global-set-key [(shift meta x)] (lambda ()
+                                   (interactive)
+                                   (or (boundp 'smex-cache)
+                                       (smex-initialize))
+                                   (global-set-key [(shift meta x)] 'smex-major-mode-commands)
+                                   (smex-major-mode-commands)))
+
+(defadvice smex (around space-inserts-hyphen activate compile)
+  (let ((ido-cannot-complete-command 
+         `(lambda ()
+            (interactive)
+            (if (string= " " (this-command-keys))
+                (insert ?-)
+              (funcall ,ido-cannot-complete-command)))))
+    ad-do-it))
+
+;; switch-window
+(require 'switch-window)
 
 ;; 
 (require 'key-bindings)
 (require 'misc-func)
 (require 'setup-php)
+(require 'setup-js)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(php+-mode-delete-trailing-whitespace t)
+ '(php+-mode-php-compile-on-save t)
+ '(php+-mode-show-project-in-modeline t)
+ '(php+-mode-show-trailing-whitespace t)
+ '(php-doc-default-author (quote ("Espen Volden" . "voldern@hoeggen.net")))
+ '(php-file-patterns (quote ("\\.php[s345t]?\\'" "\\.inc\\'")))
+ '(php-html-basic-offset 4)
+ '(php-project-list (quote (("direkte" "~/webdev/html/livestudio" "~/webdev/html/livestudio/TAGS" nil "" nil (("" . "") "" "" "" "" "" "" "" "") "Livestudio" ""))))
+ '(phpcs-standard "VG")
+ '(scss-compile-at-save nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

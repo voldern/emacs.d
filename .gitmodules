@@ -1,3 +1,6 @@
 [submodule "vendor/phpplus-mode"]
 	path = vendor/phpplus-mode
 	url = git://github.com/echosa/phpplus-mode.git
+[submodule "vendor/flymake-phpcs"]
+	path = vendor/flymake-phpcs
+	url = git://github.com/illusori/emacs-flymake-phpcs.git

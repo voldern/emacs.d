@@ -124,13 +124,13 @@
 
 		;; cmd(  ){ - style construction
 		(progn
-		  (insert " ")(set-register 98 (point-marker))(insert " ){")))
+		  (insert " ")(set-register 98 (point-marker))(insert " ) {")))
 	      (php-electric-insert-new-line-and-statement-end)
 	      (jump-to-register 98)(set-register 98 nil))
 	  (if (php-electric-line-is-expandible-as-func)
 	      ;; inserting the function expanding
 	      (save-excursion
-		(insert "(){")(php-electric-insert-new-line-and-statement-end))
+		(insert "() {")(php-electric-insert-new-line-and-statement-end))
 	    (if (php-electric-line-is-expandible-as-class)
 		;; inserting the class expanding
 		(save-excursion

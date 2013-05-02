@@ -1,4 +1,10 @@
+;;; setup-php.el --- PHP setup / options
+
+;;; Commentary:
+
+;;; Code:
 (defun setup-multi-web-mode ()
+  "Function to setup multi-web-mode."
   (require 'php-mode)
   (require 'php+-mode)
   (php+-mode-setup)
@@ -14,9 +20,20 @@
 (add-hook 'after-init-hook 'setup-multi-web-mode)
 (add-hook 'php+-mode-hook (lambda ()
                             (require 'php-electric)
-                            (php-electric-mode)
-                            (require 'flymake-php)
-                            (flymake-php-load)))
+                            (php-electric-mode)))
+
+(flycheck-declare-checker flycheck-checker-php+
+  "PHP+ mode flycheck"
+  :command '("php" "-l" "-d" "error_reporting=E_ALL" "-d" "display_errors=1" "-d" "log_errors=0" source)
+  :error-patterns '(("\\(?:Parse\\|Fatal\\|syntax\\) error[:,] \\(.*\\) in \\(.*\\) on line \\([0-9]+\\)" error))
+  :modes 'php+-mode)
+
+(defun my-after-init-php ()
+  "After php init hook."
+  (require 'flycheck)
+  (add-to-list 'flycheck-checkers 'flycheck-checker-php+))
+
+(add-hook 'after-init-hook 'my-after-init-php)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -38,3 +55,4 @@
             (set (make-local-variable 'sgml-basic-offset) 4)))
 
 (provide 'setup-php)
+;;; setup-php.el ends here

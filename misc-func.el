@@ -105,4 +105,53 @@ Symbols matching the text at point are put first in the completion list."
           "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in "
           "culpa qui officia deserunt mollit anim id est laborum."))
 
+
+;; artist-mode
+;; integrate ido with artist-mode
+(defun artist-ido-select-operation (type)
+  "Use ido to select a drawing operation in artist-mode"
+  (interactive (list (ido-completing-read "Drawing operation: " 
+                                          (list "Pen" "Pen Line" "line" "straight line" "rectangle" 
+                                                "square" "poly-line" "straight poly-line" "ellipse" 
+                                                "circle" "text see-thru" "text-overwrite" "spray-can" 
+                                                "erase char" "erase rectangle" "vaporize line" "vaporize lines" 
+                                                "cut rectangle" "cut square" "copy rectangle" "copy square" 
+                                                "paste" "flood-fill"))))
+  (artist-select-operation type))
+
+(defun artist-ido-select-settings (type)
+  "Use ido to select a setting to change in artist-mode"
+  (interactive (list (ido-completing-read "Setting: " 
+                                          (list "Set Fill" "Set Line" "Set Erase" "Spray-size" "Spray-chars" 
+                                                "Rubber-banding" "Trimming" "Borders"))))
+  (if (equal type "Spray-size") 
+      (artist-select-operation "spray set size")
+    (call-interactively (artist-fc-get-fn-from-symbol 
+                         (cdr (assoc type '(("Set Fill" . set-fill)
+                                            ("Set Line" . set-line)
+                                            ("Set Erase" . set-erase)
+                                            ("Rubber-banding" . rubber-band)
+                                            ("Trimming" . trimming)
+                                            ("Borders" . borders)
+                                            ("Spray-chars" . spray-chars))))))))
+
+(defun xml-prettify-region (begin end)
+  "Pretty format XML markup in region. You need to have nxml-mode
+http://www.emacswiki.org/cgi-bin/wiki/NxmlMode installed to do
+this.  The function inserts linebreaks to separate tags that have
+nothing but whitespace between them.  It then indents the markup
+by using nxml's indentation rules."
+  (interactive "r")
+  (save-excursion
+      (nxml-mode)
+      (goto-char begin)
+      (while (search-forward-regexp "\>[ \\t]*\<" nil t) 
+        (backward-char) (insert "\n"))
+      (indent-region begin end))
+    (message "Ah, much better!"))
+
+(defun xml-prettify-buffer ()
+  (interactive)
+  (xml-prettify-region (point-min) (point-max)))
+
 (provide 'misc-func)

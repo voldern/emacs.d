@@ -136,10 +136,12 @@
 
 ;; switch-window
 (require 'switch-window)
+(winner-mode 1)
 
 ;; 
 (require 'key-bindings)
 (require 'misc-func)
+(require 'setup-html)
 (require 'setup-php)
 (require 'setup-js)
 

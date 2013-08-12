@@ -17,6 +17,10 @@
 (prefer-coding-system 'utf-8)
 (ansi-color-for-comint-mode-on)
 
+;; Add private bin folder to loadpath
+(setenv "PATH" (concat (getenv "HOME") "/bin:" (getenv "PATH")))
+(setq exec-path (cons (concat (getenv "HOME") "/bin") exec-path))
+
 ;; Disable startup screen
 (setq inhibit-startup-message t)
 
@@ -67,6 +71,7 @@
                                         (concat dotfiles-dir "backups")))))
 
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 
 ;; Default to unified diffs
 (setq diff-switches "-u -w")
@@ -101,6 +106,12 @@
               (0 (progn (compose-region (match-beginning 1)
                                         (match-end 1) "f")
                         nil)))))
+
+;; Add rbenv to load path
+(setenv "PATH" (concat (getenv "HOME") "/.rbenv/shims:" (getenv "HOME")
+                       "/.rbenv/bin:" (getenv "PATH")))
+(setq exec-path (cons (concat (getenv "HOME") "/.rbenv/shims")
+                      (cons (concat (getenv "HOME") "/.rbenv/bin") exec-path)))
 
 ;; Flycheck
 (add-hook 'find-file-hook 'flycheck-mode)
@@ -137,6 +148,8 @@
 ;; switch-window
 (require 'switch-window)
 
+(winner-mode 1)
+
 ;; 
 (require 'key-bindings)
 (require 'misc-func)
@@ -148,6 +161,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(coffee-tab-width 2)
  '(php+-mode-delete-trailing-whitespace t)
  '(php+-mode-php-compile-on-save t)
  '(php+-mode-show-project-in-modeline t)

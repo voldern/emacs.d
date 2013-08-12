@@ -5,7 +5,7 @@
 ;;; Code:
 (setq package-list '(php-mode multi-web-mode haml-mode yaml-mode magit
                               flymake-php flymake-ruby ace-jump-mode twilight-theme
-			      undo-tree switch-window flycheck smex))
+                              undo-tree switch-window flycheck smex tagedit))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages")

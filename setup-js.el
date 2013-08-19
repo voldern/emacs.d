@@ -18,5 +18,19 @@
   (add-to-list 'flycheck-checkers 'flycheck-checker-jslint))
 (add-hook 'after-init-hook 'my-after-init-js)
 
+(defun after-init-js2-mode ()
+  "After js2-mode init."
+  (auto-complete-mode t)
+  (tern-mode t)
+  (imenu-add-menubar-index)
+  (hs-minor-mode t))
+
+(add-hook 'js2-mode-hook 'after-init-js2-mode)
+
+(eval-after-load 'tern
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)))
+
 (provide 'setup-js)
 ;;; setup-js.el ends here

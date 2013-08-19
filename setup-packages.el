@@ -3,12 +3,13 @@
 ;;; Commentary:
 
 ;;; Code:
-(setq package-list '(php-mode multi-web-mode haml-mode yaml-mode magit
+(setq package-list '(php-mode multi-web-mode haml-mode yaml-mode 
                               flymake-php flymake-ruby ace-jump-mode twilight-theme
-                              undo-tree switch-window flycheck smex tagedit))
+                              undo-tree switch-window flycheck smex tagedit
+                              auto-complete js2-mode tern tern-auto-complete))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 ; activate all the packages (in particular autoloads)

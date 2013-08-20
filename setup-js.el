@@ -12,18 +12,16 @@
                     ("^\\(.+\\)\:\\([0-9]+\\)\: strict \\(warning: trailing comma.+\\)\:$" warning))
   :modes 'js2-mode)
 
-(defun my-after-init-js ()
-  "After js init hook."
-  (require 'flycheck)
-  (add-to-list 'flycheck-checkers 'flycheck-checker-jslint))
-(add-hook 'after-init-hook 'my-after-init-js)
-
 (defun after-init-js2-mode ()
   "After js2-mode init."
+  (require 'flycheck)
+  (add-to-list 'flycheck-checkers 'flycheck-checker-jslint)
   (auto-complete-mode t)
   (tern-mode t)
   (imenu-add-menubar-index)
   (hs-minor-mode t))
+
+(setq js2-global-externs '("define"))
 
 (add-hook 'js2-mode-hook 'after-init-js2-mode)
 

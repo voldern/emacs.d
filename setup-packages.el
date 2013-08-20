@@ -3,7 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
-(setq package-list '(php-mode multi-web-mode haml-mode yaml-mode 
+(setq package-list '(php-mode multi-web-mode haml-mode yaml-mode magit
                               flymake-php flymake-ruby ace-jump-mode twilight-theme
                               undo-tree switch-window flycheck smex tagedit
                               auto-complete js2-mode tern tern-auto-complete))

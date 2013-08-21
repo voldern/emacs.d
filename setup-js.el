@@ -15,6 +15,7 @@
 (defun after-init-js2-mode ()
   "After js2-mode init."
   (require 'flycheck)
+  (require 'auto-complete)
   (add-to-list 'flycheck-checkers 'flycheck-checker-jslint)
   (auto-complete-mode t)
   (tern-mode t)

@@ -3,9 +3,12 @@
 ;;; Commentary:
 
 ;;; Code:
+
+(defvar jsl-conf (file-truename "~/.emacs.d/jsl.conf"))
+
 (flycheck-declare-checker flycheck-checker-jslint
   "jslint checker"
-  :command '("jsl" "-process" source)
+  :command '("jsl" (config-file "-conf" jsl-conf) "-process" source)
   :error-patterns '(("^\\(.+\\)\:\\([0-9]+\\)\: \\(SyntaxError\:.+\\)\:$" error)
                     ("^\\(.+\\)(\\([0-9]+\\)): \\(SyntaxError:.+\\)$" error)
                     ("^\\(.+\\)(\\([0-9]+\\)): \\(lint \\)?\\(warning:.+\\)$" warning)

@@ -15,6 +15,13 @@
                     ("^\\(.+\\)\:\\([0-9]+\\)\: strict \\(warning: trailing comma.+\\)\:$" warning))
   :modes 'js2-mode)
 
+;; Replace inline function returns with <
+(font-lock-add-keywords
+ 'js2-mode `(("function *([^)]*) *{ *\\(return\\) "
+              (0 (progn (compose-region (match-beginning 1)
+                                        (match-end 1) "<")
+                        nil)))))
+
 (defun after-init-js2-mode ()
   "After js2-mode init."
   (require 'flycheck)

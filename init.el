@@ -149,7 +149,7 @@
                                    (smex-major-mode-commands)))
 
 (defadvice smex (around space-inserts-hyphen activate compile)
-  (let ((ido-cannot-complete-command 
+  (let ((ido-cannot-complete-command
          `(lambda ()
             (interactive)
             (if (string= " " (this-command-keys))
@@ -161,14 +161,13 @@
 (require 'switch-window)
 (winner-mode 1)
 
-(winner-mode 1)
-
-;; 
+;;
 (require 'key-bindings)
 (require 'misc-func)
 (require 'setup-html)
 (require 'setup-php)
 (require 'setup-js)
+(require 'setup-term)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

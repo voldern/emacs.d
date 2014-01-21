@@ -5,4 +5,6 @@
      (tagedit-add-experimental-features)
      (add-hook 'html-mode-hook (lambda () (tagedit-mode 1)))))
 
+(setq sgml-basic-offset 4)
+
 (provide 'setup-html)

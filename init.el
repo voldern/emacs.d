@@ -46,6 +46,10 @@
 ;; enable narrow view
 (put 'narrow-to-region 'disabled nil)
 
+;; Cleanup whitespace before saving
+(add-hook 'write-file-hooks
+          (lambda () (whitespace-cleanup) nil))
+
 ;; Ido
 (ido-mode t)
 (setq ido-enable-prefix nil

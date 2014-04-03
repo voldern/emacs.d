@@ -47,8 +47,7 @@
 (put 'narrow-to-region 'disabled nil)
 
 ;; Cleanup whitespace before saving
-(add-hook 'write-file-hooks
-          (lambda () (whitespace-cleanup) nil))
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;; Ido
 (ido-mode t)
@@ -165,6 +164,8 @@
 (require 'switch-window)
 (winner-mode 1)
 
+(setq scss-compile-at-save nil)
+
 ;;
 (require 'key-bindings)
 (require 'misc-func)
@@ -187,8 +188,7 @@
  '(php-file-patterns (quote ("\\.php[s345t]?\\'" "\\.inc\\'")))
  '(php-html-basic-offset 4)
  '(php-project-list (quote (("direkte" "~/webdev/html/livestudio" "~/webdev/html/livestudio/TAGS" nil "" nil (("" . "") "" "" "" "" "" "" "" "") "Livestudio" ""))))
- '(phpcs-standard "VG")
- '(scss-compile-at-save nil))
+ '(phpcs-standard "VG"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

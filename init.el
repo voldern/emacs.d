@@ -181,7 +181,7 @@
  ;; If there is more than one, they won't work right.
  '(coffee-tab-width 2)
  '(php+-mode-delete-trailing-whitespace t)
- '(php+-mode-php-compile-on-save t)
+ '(php+-mode-php-compile-on-save nil)
  '(php+-mode-show-project-in-modeline t)
  '(php+-mode-show-trailing-whitespace t)
  '(php-doc-default-author (quote ("Espen Volden" . "voldern@hoeggen.net")))

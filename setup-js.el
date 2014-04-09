@@ -6,14 +6,14 @@
 
 (defvar jsl-conf (file-truename "~/.emacs.d/jsl.conf"))
 
-(flycheck-declare-checker flycheck-checker-jslint
+(flycheck-define-checker jslint-custom
   "jslint checker"
-  :command '("jsl" (config-file "-conf" jsl-conf) "-process" source)
-  :error-patterns '(("^\\(.+\\)\:\\([0-9]+\\)\: \\(SyntaxError\:.+\\)\:$" error)
-                    ("^\\(.+\\)(\\([0-9]+\\)): \\(SyntaxError:.+\\)$" error)
-                    ("^\\(.+\\)(\\([0-9]+\\)): \\(lint \\)?\\(warning:.+\\)$" warning)
-                    ("^\\(.+\\)\:\\([0-9]+\\)\: strict \\(warning: trailing comma.+\\)\:$" warning))
-  :modes 'js2-mode)
+  :command ("jsl" (config-file "-conf" jsl-conf) "-process" source)
+  :error-patterns ((error "^\\(.+\\)\:\\([0-9]+\\)\: \\(SyntaxError\:.+\\)\:$")
+                   (error "^\\(.+\\)(\\([0-9]+\\)): \\(SyntaxError:.+\\)$")
+                   (warning "^\\(.+\\)(\\([0-9]+\\)): \\(lint \\)?\\(warning:.+\\)$")
+                   (warning "^\\(.+\\)\:\\([0-9]+\\)\: strict \\(warning: trailing comma.+\\)\:$"))
+  :modes js2-mode)
 
 ;; Replace inline function returns with <
 (font-lock-add-keywords
@@ -26,7 +26,7 @@
   "After js2-mode init."
   (require 'flycheck)
   (require 'auto-complete)
-  (add-to-list 'flycheck-checkers 'flycheck-checker-jslint)
+  (add-to-list 'flycheck-checkers 'jslint-custom)
   (auto-complete-mode t)
   (tern-mode t)
   (imenu-add-menubar-index)

@@ -51,4 +51,6 @@
 
 (global-set-key "\C-cø" 'ace-jump-mode)
 
+(define-key yas-minor-mode-map (kbd "<backtab>") 'yas-expand)
+
 (provide 'key-bindings)

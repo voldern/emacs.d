@@ -5,6 +5,7 @@
 ;;; Code:
 (eval-when-compile
   (require 'flycheck)
+  (require 'php-mode)
   (require 'php-electric))
 
 (defun setup-multi-web-mode ()

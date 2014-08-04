@@ -4,3 +4,9 @@ eshell
 *~
 *.elc
 \#*#
+projectile-bookmarks.eld
+projectile.cache
+swank
+url
+tramp
+ac-comphist.dat

@@ -1,0 +1,14 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: backbone view
+# key: BV
+# binding: direct-keybinding
+# --
+var ${1:view} = Backbone.View.extend({
+   initialize: function(options) {
+       $0
+   },
+
+   render: function() {
+       return this;
+   }
+});

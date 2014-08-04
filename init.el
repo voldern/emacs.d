@@ -61,6 +61,10 @@
 (set-default 'indicate-empty-lines t)
 (set-default 'imenu-auto-rescan t)
 
+;; YASnippet
+(require 'yasnippet)
+(yas-global-mode 1)
+
 ;; Uniquify
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -160,6 +164,23 @@
               (funcall ,ido-cannot-complete-command)))))
     ad-do-it))
 
+;; helm
+(helm-mode 1)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+;; projectile
+(projectile-global-mode)
+(setq projectile-enable-caching t)
+(setq projectile-svn-command "/opt/svn-1.6/bin/svn list -R . | grep -v '$/' | tr '\\n' '\\0'")
+(global-set-key (kbd "C-c h") 'helm-projectile)
+
+;; perspective
+(persp-mode)
+(require 'persp-projectile)
+
 ;; switch-window
 (require 'switch-window)
 (winner-mode 1)
@@ -194,4 +215,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+
  )

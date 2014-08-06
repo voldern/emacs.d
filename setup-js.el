@@ -4,17 +4,6 @@
 
 ;;; Code:
 
-(defvar jsl-conf (file-truename "~/.emacs.d/jsl.conf"))
-
-(flycheck-define-checker jslint-custom
-  "jslint checker"
-  :command ("jsl" (config-file "-conf" jsl-conf) "-process" source)
-  :error-patterns ((error "^\\(.+\\)\:\\([0-9]+\\)\: \\(SyntaxError\:.+\\)\:$")
-                   (error "^\\(.+\\)(\\([0-9]+\\)): \\(SyntaxError:.+\\)$")
-                   (warning "^\\(.+\\)(\\([0-9]+\\)): \\(lint \\)?\\(warning:.+\\)$")
-                   (warning "^\\(.+\\)\:\\([0-9]+\\)\: strict \\(warning: trailing comma.+\\)\:$"))
-  :modes js2-mode)
-
 ;; Replace inline function returns with <
 (font-lock-add-keywords
  'js2-mode `(("function *([^)]*) *{ *\\(return\\) "
@@ -26,13 +15,15 @@
   "After js2-mode init."
   (require 'flycheck)
   (require 'auto-complete)
-  (add-to-list 'flycheck-checkers 'jslint-custom)
   (auto-complete-mode t)
   (tern-mode t)
   (imenu-add-menubar-index)
   (hs-minor-mode t))
 
 (setq js2-global-externs '("define"))
+(setq js2-bounce-indent-p t)
+(setq js2-mode-indent-ignore-first-tab t)
+(setq js2-mode-show-strict-warnings nil)
 
 (add-hook 'js2-mode-hook 'after-init-js2-mode)
 

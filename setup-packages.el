@@ -8,7 +8,7 @@
                               undo-tree switch-window flycheck smex tagedit
                               auto-complete js2-mode tern tern-auto-complete ag
                               flx-ido projectile helm helm-ag helm-projectile
-                              perspective persp-projectile yasnippet))
+                              perspective persp-projectile yasnippet js2-refactor))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")

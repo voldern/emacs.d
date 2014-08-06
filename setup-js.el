@@ -15,10 +15,12 @@
   "After js2-mode init."
   (require 'flycheck)
   (require 'auto-complete)
+  (require 'js2-refactor)
   (auto-complete-mode t)
   (tern-mode t)
   (imenu-add-menubar-index)
-  (hs-minor-mode t))
+  (hs-minor-mode t)
+  (js2r-add-keybindings-with-prefix "C-c C-m"))
 
 (setq js2-global-externs '("define"))
 (setq js2-bounce-indent-p t)

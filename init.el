@@ -8,9 +8,6 @@
 
 ;; ELPA
 (require 'setup-packages)
-;; (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-;;                          ("marmalade" . "http://marmalade-repo.org/packages")
-;;                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)

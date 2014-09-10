@@ -9,6 +9,13 @@
 ;; ELPA
 (require 'setup-packages)
 
+;; Fonts
+(when (member "Envy Code R" (font-family-list))
+  (add-to-list 'default-frame-alist '(font .  "Envy Code R-12")))
+
+(custom-set-faces
+  '(variable-pitch ((t (:family "Liberation Sans")))))
+
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)

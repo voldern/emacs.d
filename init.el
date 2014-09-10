@@ -195,6 +195,9 @@
 
 (setq scss-compile-at-save nil)
 
+;; electric pair
+(electric-pair-mode t)
+
 ;;
 (require 'key-bindings)
 (require 'misc-func)

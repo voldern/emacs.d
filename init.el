@@ -86,6 +86,7 @@
 ;; Default to unified diffs
 (setq diff-switches "-u -w")
 
+;; Set diff colors
 (eval-after-load 'diff-mode
   '(progn
      (set-face-foreground 'diff-added "green4")
@@ -118,11 +119,12 @@
         (set-marker m nil))
     ad-do-it))
 
-;; After elpa load
+;; Setup theme after elpa load
 (defun my-after-init ()
   (require 'twilight-theme))
 (add-hook 'after-init-hook 'my-after-init)
 
+;; Turn function() into f() in js2-mode
 (font-lock-add-keywords
  'js2-mode `(("\\(function *\\)("
               (0 (progn (compose-region (match-beginning 1)

@@ -23,7 +23,7 @@
   (js2r-add-keybindings-with-prefix "C-c C-m"))
 
 (setq js2-global-externs '("define"))
-(setq js2-bounce-indent-p t)
+(setq js2-bounce-indent-p nil)
 (setq js2-mode-indent-ignore-first-tab t)
 (setq js2-mode-show-strict-warnings nil)
 

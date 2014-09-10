@@ -46,6 +46,16 @@
 ;; Cleanup whitespace before saving
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
+;; Highlight tabulations
+(setq-default highlight-tabs t)
+
+;; Show trailing white spaces
+(setq-default show-trailing-whitespace t)
+
+(set-default 'indent-tabs-mode nil)
+(set-default 'indicate-empty-lines t)
+(set-default 'imenu-auto-rescan t)
+
 ;; Ido
 (ido-mode t)
 (setq ido-enable-prefix nil

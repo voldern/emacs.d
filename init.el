@@ -204,6 +204,7 @@
 (require 'setup-html)
 (require 'setup-php)
 (require 'setup-js)
+(require 'setup-clojure)
 (require 'setup-term)
 
 (custom-set-variables

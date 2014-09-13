@@ -9,7 +9,7 @@
                               auto-complete js2-mode tern tern-auto-complete ag
                               flx-ido projectile helm helm-ag helm-ag-r helm-projectile
                               perspective persp-projectile yasnippet js2-refactor
-                              autopair))
+                              autopair cider cljdoc rainbow-delimiters))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")

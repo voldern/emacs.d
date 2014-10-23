@@ -206,6 +206,7 @@
 (require 'setup-js)
 (require 'setup-clojure)
 (require 'setup-term)
+(require 'setup-org)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

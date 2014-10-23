@@ -2,9 +2,9 @@
 (setq dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
 
-(add-to-list 'load-path dotfiles-dir)
-(add-to-list 'load-path "~/.emacs.d/vendor/")
-(add-to-list 'load-path "~/.emacs.d/vendor/phpplus-mode")
+(add-to-list 'load-path (concat dotfiles-dir "lisp"))
+(add-to-list 'load-path (concat dotfiles-dir "vendor"))
+(add-to-list 'load-path (concat dotfiles-dir "vendor/phpplus-mode"))
 
 ;; ELPA
 (require 'setup-packages)

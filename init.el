@@ -84,8 +84,10 @@
 (random t) ;; Seed the random-number generator
 
 ;; Don't clutter up directories with files~
-(setq backup-directory-alist `(("." . ,(expand-file-name
-                                        (concat dotfiles-dir "backups")))))
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name (concat dotfiles-dir "backups")))))
+(setq auto-save-file-name-transforms
+      `((".*" ,(expand-file-name (concat dotfiles-dir "backups")))))
 
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))

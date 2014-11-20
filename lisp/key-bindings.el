@@ -1,3 +1,6 @@
+;; Newline and indent
+(define-key global-map (kbd "C-j") 'newline-and-indent)
+
 ;; Font size
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)

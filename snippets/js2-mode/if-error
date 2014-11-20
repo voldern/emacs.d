@@ -1,0 +1,8 @@
+# -*- mode: snippet; if-error: nil -*-
+# name: if error
+# key: ife
+# binding: direct-keybinding
+# --
+if (${1:err}) {
+    return callback($1);
+}

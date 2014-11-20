@@ -149,6 +149,11 @@
 ;; Flycheck
 (add-hook 'find-file-hook 'flycheck-mode)
 
+;; (require 'flycheck-pos-tip)
+(eval-after-load 'flycheck
+  '(custom-set-variables
+   '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
+
 ;; SVN
 (autoload 'svn-status "dsvn" "Run `svn status'." t)
 (autoload 'svn-update "dsvn" "Run `svn update'." t)

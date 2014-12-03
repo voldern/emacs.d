@@ -11,9 +11,6 @@
 (defun setup-multi-web-mode ()
   "Function to setup multi-web-mode."
   (require 'php-mode)
-  (require 'php+-mode)
-  (php+-mode-setup)
-
   (require 'multi-web-mode)
   (setq mweb-default-major-mode 'html-mode)
   (setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
@@ -24,18 +21,20 @@
 
 (add-hook 'after-init-hook 'setup-multi-web-mode)
 
-(add-hook 'php+-mode-hook (lambda ()
-                            (require 'php-electric)
-                            (php-electric-mode)
-                            (setq-local flycheck-phpcs-standard "VG")
-                            (setq-local flycheck-phpmd-rulesets '("codesize" "design" "naming" "unusedcode"))
-                            (flycheck-mode 1)))
+(add-hook 'php-mode-hook (lambda ()
+                           (require 'php-electric)
+                           (php-electric-mode)
+                           (setq-local flycheck-phpcs-standard "PSR2")
+                           (setq-local flycheck-phpmd-rulesets '("codesize" "design" "naming" "unusedcode"))
+                           (setq php-template-compatibility nil)
+                           (subword-mode 1)
+                           (Flycheck-mode 1)))
 
-(flycheck-define-checker flycheck-checker-php+
-  "PHP+ mode flycheck"
+(flycheck-define-checker flycheck-checker-php
+  "PHP mode flycheck"
   :command ("php" "-l" "-d" "error_reporting=E_ALL" "-d" "display_errors=1" "-d" "log_errors=0" source)
   :error-patterns ((error "\\(?:Parse\\|Fatal\\|syntax\\) error[:,] \\(.*\\) in \\(.*\\) on line \\([0-9]+\\)"))
-  :modes php+-mode)
+  :modes php-mode)
 
 (defun my-after-init-php ()
   "After php init hook."
@@ -59,27 +58,31 @@
                         ;; (shell-command "growlnotify -m 'Success' -t 'PHP Compilation' --appIcon 'Emacs' &> /dev/null")
                         )
                       buffer)))
+
 (add-hook 'compilation-finish-functions 'bury-compile-buffer-if-successful)
 
-(setq phpcs-standard "VG")
+(setq phpcs-standard "PSR2")
 
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(php+-mode-delete-trailing-whitespace t)
-;;  '(php+-mode-php-compile-on-save t)
-;;  '(php+-mode-show-project-in-modeline t)
-;;  '(php+-mode-show-trailing-whitespace t)
-;;  '(php-doc-default-author (quote ("Espen Volden" . "voldern@hoeggen.net")))
-;;  '(php-file-patterns (quote ("\\.php[s345t]?\\'" "\\.inc\\'")))
-;;  '(php-html-basic-offset 4)
-;;  '(php-project-list (quote (("direkte" "~/webdev/html/livestudio" "~/webdev/html/livestudio/TAGS" nil "" nil (("" . "") "" "" "" "" "" "" "" "") "Livestudio" "")))))
+;; (font-lock-remove-keywords
+;;  'php-mode `(("function .*(.*)\\(\n *{\\)\n"
+;;               (0 (progn (compose-region (match-beginning 1)
+;;                                         (match-end 1) "
+;;     {")
+;;                         nil)))))
+
+(font-lock-add-keywords
+ 'php-mode `(("function .*(.*)\\(\n *{\\)\n"
+              (0 (progn (put-text-property (match-beginning 1)
+                                           (match-end 1) 'display " ❴")
+                        nil)))
+             ("class .*\\(\n *{\\)\n"
+              (0 (progn (put-text-property (match-beginning 1)
+                                           (match-end 1) 'display " ❴")
+                        nil)))))
 
 (add-hook 'html-mode-hook
           (lambda ()
             (set (make-local-variable 'sgml-basic-offset) 4)))
 
 (provide 'setup-php)
-;;; setup-php.el ends here
+;; setup-php.el ends here

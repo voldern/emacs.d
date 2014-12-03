@@ -15,12 +15,12 @@
 ;; modify it under the terms of the GNU General Public License
 ;; as published by the Free Software Foundation; either version 2
 ;; of the License, or (at your option) any later version.
-;; 
+;;
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;; 
+;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program; if not, write to the Free Software
 ;; Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -111,30 +111,36 @@
   (self-insert-command (prefix-numeric-value arg))
   (if (php-electric-is-code-at-point-p)
       (if (php-electric-line-is-simple-expandible)
-	  ;; inserting just a pair of curleis
-	  (progn
-	    (insert "{")(php-electric-insert-new-line-and-statement-end))
-	(if (php-electric-line-is-expandible-as-struct)
-	    ;; inserting a structure definition
-	    (progn
-	      (if (not (char-equal ?\( (preceding-char)))
-		  ;; cmd () {  - style construction
-		  (progn
-		    (insert "(")(set-register 98 (point-marker))(insert ") {"))
+          ;; inserting just a pair of curleis
+          (progn
+            (insert "{")(php-electric-insert-new-line-and-statement-end))
+        (if (php-electric-line-is-expandible-as-struct)
+            ;; inserting a structure definition
+            (progn
+              (if (not (char-equal ?\( (preceding-char)))
+                  ;; cmd () {  - style construction
+                  (progn
+                    (insert "(")(set-register 98 (point-marker))(insert ") {"))
 
-		;; cmd(  ){ - style construction
-		(progn
-		  (insert " ")(set-register 98 (point-marker))(insert " ) {")))
-	      (php-electric-insert-new-line-and-statement-end)
-	      (jump-to-register 98)(set-register 98 nil))
-	  (if (php-electric-line-is-expandible-as-func)
-	      ;; inserting the function expanding
-	      (save-excursion
-		(insert "() {")(php-electric-insert-new-line-and-statement-end))
-	    (if (php-electric-line-is-expandible-as-class)
-		;; inserting the class expanding
-		(save-excursion
-		  (insert "{")(php-electric-insert-new-line-and-statement-end))))))))
+                ;; cmd(  ){ - style construction
+                (progn
+                  (insert " ")(set-register 98 (point-marker))(insert " ) {")))
+              (php-electric-insert-new-line-and-statement-end)
+              (jump-to-register 98)(set-register 98 nil))
+          (if (php-electric-line-is-expandible-as-func)
+              ;; inserting the function expanding
+              (save-excursion
+                (insert "()")
+                (insert "\n{")
+                (indent-according-to-mode)
+                (php-electric-insert-new-line-and-statement-end))
+            ;; (if (php-electric-line-is-expandible-as-class)
+            ;;     ;; inserting the class expanding
+            ;;     (save-excursion
+            ;;       (insert "\n{")
+            ;;       (indent-according-to-mode)
+            ;;       (php-electric-insert-new-line-and-statement-end)))
+            )))))
 
 ;; handler for the { chars
 (defun php-electric-curlies(arg)
@@ -142,7 +148,7 @@
   (self-insert-command (prefix-numeric-value arg))
   (if (php-electric-is-code-at-point-p)
       (progn
-	(php-electric-insert-new-line-and-statement-end))))
+        (php-electric-insert-new-line-and-statement-end))))
 
 ;; handler for the ( chars
 (defun php-electric-brackets(arg)
@@ -151,8 +157,8 @@
   (if (php-electric-is-code-at-point-p)
       ;; checking if it's a statement
       (if (php-electric-line-is-expandible-as-struct)
-	  (progn (php-electric-space arg))
-	(progn (php-electric-matching-char arg)))
+          (progn (php-electric-space arg))
+        (progn (php-electric-matching-char arg)))
     (self-insert-command (prefix-numeric-value arg))))
 
 ;; handler for the paired chars, [], (), "", ''
@@ -161,20 +167,20 @@
   (self-insert-command (prefix-numeric-value arg))
   (if (php-electric-is-code-at-point-p)
       (save-excursion
-	(insert (cdr (assoc last-command-char
-			    php-electric-matching-delimeter-alist))))))
+        (insert (cdr (assoc last-command-char
+                            php-electric-matching-delimeter-alist))))))
 
 ;; checks if the current pointer situated in a piece of code
 (defun php-electric-is-code-at-point-p()
   (and php-electric-mode
        (let* ((properties (text-properties-at (point))))
-	 (and (null (memq 'font-lock-string-face properties))
-	      (null (memq 'font-lock-comment-face properties))))))
+         (and (null (memq 'font-lock-string-face properties))
+              (null (memq 'font-lock-comment-face properties))))))
 
 ;; checks if the current line expandible with a simple {} construction
 (defun php-electric-line-is-simple-expandible()
   (let* ((php-electric-expandible-simple-real-re
-	  (concat php-electric-expandible-simple-re "\\s-$")))
+          (concat php-electric-expandible-simple-re "\\s-$")))
     (save-excursion
       (backward-word 1)
       (looking-at php-electric-expandible-simple-real-re))))
@@ -182,18 +188,18 @@
 ;; checks if the current line expandible with the (){} construction
 (defun php-electric-line-is-expandible-as-struct()
   (let* ((php-electric-expandible-as-struct-real-re
-	  (concat php-electric-expandible-as-struct-re "[ ]*$"))
-	 (php-electric-expandible-as-struct-with-bracket-re
-	  (concat php-electric-expandible-as-struct-re "($")))
+          (concat php-electric-expandible-as-struct-re "[ ]*$"))
+         (php-electric-expandible-as-struct-with-bracket-re
+          (concat php-electric-expandible-as-struct-re "($")))
     (save-excursion
       (backward-word 1)
       (or (looking-at php-electric-expandible-as-struct-real-re)
-	  (looking-at php-electric-expandible-as-struct-with-bracket-re)))))
+          (looking-at php-electric-expandible-as-struct-with-bracket-re)))))
 
 ;; checks if the current line expandible with the name(){} construction
 (defun php-electric-line-is-expandible-as-func()
   (let* ((php-electric-expandible-as-func-real-re
-	  (concat php-electric-expandible-as-func-re "\\s-$")))
+          (concat php-electric-expandible-as-func-re "\\s-$")))
     (save-excursion
       (backward-word 1)
       (looking-at php-electric-expandible-as-func-real-re))))
@@ -201,9 +207,9 @@
 ;; checks if the current line expandible with the name{} construction
 (defun php-electric-line-is-expandible-as-class()
   (let* ((php-electric-expandible-as-class-real-re
-	  (concat php-electric-expandible-as-class-re "\\s-$")))
+          (concat php-electric-expandible-as-class-re "\\s-[a-zA-Z]+$")))
     (save-excursion
-      (backward-word 1)
+      (backward-word 2)
       (looking-at php-electric-expandible-as-class-real-re))))
 
 ;; "shortcut" to insert \n} construction

@@ -39,6 +39,16 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
+;; Enable git-gutter on window systems
+(when (window-system)
+  (require 'git-gutter-fringe)
+  (global-git-gutter-mode 1)
+  (setq-default indicate-buffer-boundaries 'left)
+  (setq-default indicate-empty-lines 1))
+
+;; Enable powerline
+(powerline-center-theme)
+
 ;; Transparently open compressed files
 (auto-compression-mode t)
 

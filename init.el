@@ -147,13 +147,6 @@
   (require 'twilight-theme))
 (add-hook 'after-init-hook 'my-after-init)
 
-;; Turn function() into f() in js2-mode
-(font-lock-add-keywords
- 'js2-mode `(("\\(function *\\)("
-              (0 (progn (compose-region (match-beginning 1)
-                                        (match-end 1) "f")
-                        nil)))))
-
 ;; Add rbenv to load path
 (setenv "PATH" (concat (getenv "HOME") "/.rbenv/shims:" (getenv "HOME")
                        "/.rbenv/bin:" (getenv "PATH")))

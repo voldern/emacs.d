@@ -4,6 +4,13 @@
 
 ;;; Code:
 
+;; Turn function() into f() in js2-mode
+(font-lock-add-keywords
+ 'js2-mode `(("\\(function *\\)("
+              (0 (progn (compose-region (match-beginning 1)
+                                        (match-end 1) "f")
+                        nil)))))
+
 ;; Replace inline function returns with <
 (font-lock-add-keywords
  'js2-mode `(("function *([^)]*) *{ *\\(return\\) "

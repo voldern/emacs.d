@@ -63,22 +63,19 @@
 
 (setq phpcs-standard "PSR2")
 
-;; (font-lock-remove-keywords
-;;  'php-mode `(("function .*(.*)\\(\n *{\\)\n"
-;;               (0 (progn (compose-region (match-beginning 1)
-;;                                         (match-end 1) "
-;;     {")
-;;                         nil)))))
+(let ((bracket '(progn
+                  (put-text-property (match-beginning 1)
+                                     (match-end 1) 'display " ❴")
+                  nil)))
+  (font-lock-add-keywords
+   'php-mode `(("function .*(.*)\\(\n *{\\)\n"
+                (0 ,bracket))
+               ("class .*\\(\n *{\\)\n"
+                (0 ,bracket))
+               ("trait .*\\(\n *{\\)\n"
+                (0 ,bracket)))))
 
-(font-lock-add-keywords
- 'php-mode `(("function .*(.*)\\(\n *{\\)\n"
-              (0 (progn (put-text-property (match-beginning 1)
-                                           (match-end 1) 'display " ❴")
-                        nil)))
-             ("class .*\\(\n *{\\)\n"
-              (0 (progn (put-text-property (match-beginning 1)
-                                           (match-end 1) 'display " ❴")
-                        nil)))))
+
 
 (add-hook 'html-mode-hook
           (lambda ()

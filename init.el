@@ -46,9 +46,6 @@
   (setq-default indicate-buffer-boundaries 'left)
   (setq-default indicate-empty-lines 1))
 
-;; Enable powerline
-(powerline-center-theme)
-
 ;; Transparently open compressed files
 (auto-compression-mode t)
 
@@ -221,6 +218,7 @@
 (require 'setup-clojure)
 (require 'setup-term)
 (require 'setup-org)
+(require 'setup-powerline)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

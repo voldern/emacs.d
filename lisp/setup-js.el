@@ -41,5 +41,20 @@
      (require 'tern-auto-complete)
      (tern-ac-setup)))
 
+(require 'skewer-mode)
+(skewer-setup)
+
+(defun skewer-start ()
+  (interactive)
+  (let ((httpd-port 8023))
+    (httpd-start)
+    (message "Ready to skewer the browser. Now jack in with the bookmarklet.")))
+
+(defun skewer-demo ()
+  (interactive)
+  (let ((httpd-port 8024))
+    (run-skewer)
+    (skewer-repl)))
+
 (provide 'setup-js)
 ;;; setup-js.el ends here

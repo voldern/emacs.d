@@ -209,6 +209,9 @@
 ;; electric pair
 (electric-pair-mode t)
 
+;; browse-url browser
+(setq browse-url-browser-function 'browse-url-chromium)
+
 ;;
 (require 'key-bindings)
 (require 'misc-func)

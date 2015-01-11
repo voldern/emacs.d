@@ -61,9 +61,6 @@
 ;; enable narrow view
 (put 'narrow-to-region 'disabled nil)
 
-;; Cleanup whitespace before saving
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
 ;; Highlight tabulations
 (setq-default highlight-tabs t)
 

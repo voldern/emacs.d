@@ -27,6 +27,7 @@
   (tern-mode t)
   (imenu-add-menubar-index)
   (hs-minor-mode t)
+  (add-hook 'before-save-hook 'whitespace-cleanup nil t)
   (js2r-add-keybindings-with-prefix "C-c C-m"))
 
 (setq js2-global-externs '("define"))

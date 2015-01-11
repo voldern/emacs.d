@@ -28,6 +28,7 @@
                            (setq-local flycheck-phpmd-rulesets '("codesize" "design" "naming" "unusedcode"))
                            (setq php-template-compatibility nil)
                            (subword-mode 1)
+                           (add-hook 'before-save-hook 'whitespace-cleanup nil t)
                            (Flycheck-mode 1)))
 
 (flycheck-define-checker flycheck-checker-php

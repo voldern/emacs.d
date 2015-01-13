@@ -12,10 +12,10 @@
   (interactive)
   (font-lock-add-keywords
    nil
-   '(("#[abcdef[:digit:]]\\{6\\}"
+   '(("\\(#\\)[abcdef[:digit:]]\\{6\\}"
       (0 (put-text-property
-          (match-beginning 0)
-          (match-end 0)
+          (match-beginning 1)
+          (match-end 1)
           'face (list :background (match-string-no-properties 0)))))))
   (font-lock-fontify-buffer))
 

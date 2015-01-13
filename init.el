@@ -223,7 +223,7 @@
 ;;
 (require 'key-bindings)
 (require 'misc-func)
-(require 'setup-html)
+(require 'setup-web)
 (require 'setup-php)
 (require 'setup-js)
 (require 'setup-clojure)

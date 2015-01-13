@@ -22,4 +22,4 @@
 (add-hook 'css-mode-hook 'syntax-color-hex)
 (add-hook 'scss-mode-hook 'syntax-color-hex)
 
-(provide 'setup-html)
+(provide 'setup-web)

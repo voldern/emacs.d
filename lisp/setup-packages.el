@@ -4,13 +4,13 @@
 
 ;;; Code:
 (setq package-list '(php-mode multi-web-mode haml-mode yaml-mode magit
-                              flymake-php flymake-ruby ace-jump-mode twilight-theme
+                              flymake-php flymake-ruby avy twilight-theme
                               undo-tree switch-window flycheck smex tagedit
                               auto-complete js2-mode tern tern-auto-complete ag
                               flx-ido projectile helm helm-ag helm-ag-r helm-projectile
                               perspective persp-projectile yasnippet js2-refactor
                               autopair cider cljdoc rainbow-delimiters flycheck-pos-tip
-                              powerline git-gutter-fringe skewer-mode))
+                              powerline git-gutter-fringe skewer-mode editorconfig))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")

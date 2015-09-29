@@ -18,6 +18,12 @@
                                         (match-end 1) "<")
                         nil)))))
 
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+          '(javascript-jshint)))
+
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+
 (defun after-init-js2-mode ()
   "After js2-mode init."
   (require 'flycheck)

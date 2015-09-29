@@ -52,7 +52,7 @@
 
 (global-set-key (kbd "C-c q") 'join-line)
 
-(global-set-key "\C-cø" 'ace-jump-mode)
+(global-set-key (kbd "C-c j") 'avy-goto-word-or-subword-1)
 
 (define-key yas-minor-mode-map (kbd "<backtab>") 'yas-expand)
 

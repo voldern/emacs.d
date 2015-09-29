@@ -92,8 +92,17 @@
 (random t) ;; Seed the random-number generator
 
 ;; Don't clutter up directories with files~
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
 (setq backup-directory-alist
-      `(("." . ,(expand-file-name (concat dotfiles-dir "backups")))))
+      `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms
+      `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix
+      emacs-tmp-dir)
+
+
+(setq backup-directory-alist
+      `((".*" . ,(expand-file-name (concat dotfiles-dir "backups")))))
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name (concat dotfiles-dir "backups")))))
 

@@ -123,17 +123,6 @@
 ;; Default to unified diffs
 (setq diff-switches "-u -w")
 
-;; Set diff colors
-(eval-after-load 'diff-mode
-  '(progn
-     (set-face-foreground 'diff-added "green4")
-     (set-face-foreground 'diff-removed "red3")))
-
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green3")
-     (set-face-foreground 'magit-diff-del "red3")))
-
 ;; ;; PHP-mode
 ;; (add-to-list 'auto-mode-alist '("\\.php" . php+-mode))
 

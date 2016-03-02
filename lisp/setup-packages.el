@@ -10,7 +10,7 @@
                               flx-ido projectile helm helm-ag helm-ag-r helm-projectile
                               perspective persp-projectile yasnippet js2-refactor
                               autopair cider cljdoc rainbow-delimiters flycheck-pos-tip
-                              powerline git-gutter-fringe skewer-mode helm-flx-mode))
+                              powerline git-gutter-fringe skewer-mode helm-flx))
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")

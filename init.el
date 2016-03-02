@@ -194,6 +194,7 @@
 
 ;; helm
 (helm-mode 1)
+(helm-flx-mode +1)
 
 ;; projectile
 (projectile-global-mode)

@@ -67,6 +67,13 @@
 
 (add-hook 'js2-mode-hook 'after-init-js2-mode)
 
+;; Json indent
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
+
+
 ;; (require 'skewer-mode)
 ;; (skewer-setup)
 

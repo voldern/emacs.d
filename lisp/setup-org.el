@@ -9,6 +9,7 @@
 (require 'org-protocol)
 
 (require 'setup-org-agenda)
+(require 'setup-org-clock)
 
 ;;; Key bindings
 (global-set-key (kbd "C-c c") 'org-capture)

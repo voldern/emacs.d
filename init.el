@@ -74,6 +74,7 @@
 (set-default 'indent-tabs-mode nil)
 (set-default 'indicate-empty-lines t)
 (set-default 'imenu-auto-rescan t)
+(set-default 'tab-width 4)
 
 ;; Ido
 (ido-mode t)

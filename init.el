@@ -39,6 +39,10 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
+;; Load SSH credentials from shell
+(exec-path-from-shell-copy-env "SSH_AGENT_PID")
+(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+
 ;; Enable git-gutter on window systems
 (when (window-system)
   (require 'git-gutter-fringe)

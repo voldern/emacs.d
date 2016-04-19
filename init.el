@@ -233,6 +233,7 @@
 (require 'setup-term)
 (require 'setup-org)
 (require 'setup-powerline)
+(require 'setup-go)
 (require 'setup-ruby)
 
 (custom-set-variables

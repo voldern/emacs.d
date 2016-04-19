@@ -233,6 +233,7 @@
 (require 'setup-term)
 (require 'setup-org)
 (require 'setup-powerline)
+(require 'setup-ruby)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

@@ -11,6 +11,9 @@
                     (or (buffer-file-name) load-file-name)))
 (add-to-list 'load-path (concat dotfiles-dir "lisp"))
 
+(setq custom-file (concat dotfiles-dir "custom.el"))
+(load custom-file)
+
 (req-package setup-general)
 (req-package setup-packages)
 (req-package setup-web)

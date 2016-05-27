@@ -4,7 +4,7 @@
 (require 'req-package)
 
 (req-package web-mode
-  :require flycheck pretty-mode tagedit
+  :require flycheck pretty-mode tagedit rainbow-mode
   :mode (("\\.jsx" . web-mode)
          ("\\.js" . web-mode))
   :config
@@ -23,7 +23,8 @@
   ;; Use tagedit
   (add-hook 'web-mode-hook
             (lambda ()
-              (tagedit-mode t))))
+              (tagedit-mode t)
+              (rainbow-mode t))))
 
 (req-package tern
   :require auto-complete tern-auto-complete web-mode
@@ -34,27 +35,17 @@
   (tern-ac-setup))
 
 (req-package css-mode
+  :require rainbow-mode
   :config
-  (add-hook 'css-mode-hook 'syntax-color-hex))
+  (add-hook 'css-mode-hook 'rainbow-mode))
 
 (req-package scss-mode
+  :require rainbow-mode
   :config
-  (add-hook 'scss-mode-hook 'syntax-color-hex))
+  (add-hook 'scss-mode-hook 'rainbow-mode))
 
 (req-package json-mode
   :mode (("\\.json" . json-mode)))
-
-(defun syntax-color-hex ()
-  "Syntax color hex color spec such as 「#ff1100」 in current buffer."
-  (interactive)
-  (font-lock-add-keywords
-   nil
-   '(("\\(#\\)[abcdef[:digit:]]\\{6\\}"
-      (0 (put-text-property
-          (match-beginning 1)
-          (match-end 1)
-          'face (list :background (match-string-no-properties 0)))))))
-  (font-lock-fontify-buffer))
 
 (provide 'setup-web)
 ;;; setup-web.el ends here

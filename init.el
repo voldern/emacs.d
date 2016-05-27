@@ -17,6 +17,7 @@
 (req-package setup-general)
 (req-package setup-packages)
 (req-package setup-web)
+(req-package setup-org)
 
 (req-package-finish)
 

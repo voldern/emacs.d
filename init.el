@@ -225,16 +225,9 @@
 
 ;;
 (require 'key-bindings)
-(require 'misc-func)
 (require 'setup-web)
-(require 'setup-php)
 (require 'setup-js)
-(require 'setup-clojure)
-(require 'setup-term)
 (require 'setup-org)
-(require 'setup-powerline)
-(require 'setup-go)
-(require 'setup-ruby)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

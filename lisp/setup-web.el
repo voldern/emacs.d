@@ -13,6 +13,8 @@
         '(("jsx" . "\\.js[x]?\\'")))
   ;; Setup indentation
   (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
   (setq web-mode-markup-indent-offset 4)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 4)

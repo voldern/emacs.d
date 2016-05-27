@@ -148,5 +148,16 @@
   :config
   (global-pretty-mode t))
 
+;; Expand region
+(req-package expand-region
+  :bind ("C-=" . er/expand-region))
+
+;; Multiple cursor
+(req-package multiple-cursors
+  :bind (("C-c C-SPC" . set-rectangular-region-anchor)
+         ("C-ø n" . mc/mark-next-like-this)
+         ("C-ø p" . mc/mark-previous-like-this)
+         ("C-ø a" . mc/mark-all-like-this)))
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

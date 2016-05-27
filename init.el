@@ -12,6 +12,7 @@
 (add-to-list 'load-path (concat dotfiles-dir "lisp"))
 
 (req-package setup-general)
+(req-package setup-packages)
 
 (req-package-finish)
 

@@ -164,5 +164,14 @@
   :config
   (dumb-jump-mode))
 
+(req-package langtool
+  :bind (("C-x M-l c" . langtool-check)
+         ("C-x M-l d" . langtool-check-done)
+         ("C-x M-l l" . langtool-switch-default-language)
+         ("C-x M-l s" . langtool-correct-buffer))
+  :init
+  (setq langtool-java-classpath "/usr/share/languagetool:/usr/share/java/languagetool/*")
+  (setq langtool-default-language "en-US"))
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

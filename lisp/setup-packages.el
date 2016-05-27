@@ -85,6 +85,7 @@
 
 ;; Use helm
 (req-package helm
+  :demand t
   :bind (("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
          ("C-x b" . helm-mini)

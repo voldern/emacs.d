@@ -5,13 +5,7 @@
 
 (req-package org
   :require org-protocol setup-org-agenda setup-org-clock
-  :bind (("C-c c" . org-capture)
-         ("C-c l" . org-store-link)
-         ("C-c a" . org-agenda)
-         ("C-c b" . org-iswitchb)
-         ("[f9]" bh/show-org-agenda))
-  :config
-  ;; Generic
+  :init
   (setq org-directory "~/org")
   (setq org-agenda-files (quote ("~/org"
                                  "~/org/work")))
@@ -44,15 +38,15 @@
                                               ("A." . "-")
                                               ("B." . "-")
                                               ("a." . "-")
-                                              ("b." . "-")))
+                                              ("b." . "-"))))
 
-        ;; For tag searches ignore tasks with scheduled and deadline dates
-        (setq org-agenda-tags-todo-honor-ignore-options t)
+  ;; For tag searches ignore tasks with scheduled and deadline dates
+  (setq org-agenda-tags-todo-honor-ignore-options t)
 
-        (setq org-use-fast-todo-selection t)
-        (setq org-treat-S-cursor-todo-selection-as-state-change nil)
+  (setq org-use-fast-todo-selection t)
+  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
 
-        (setq org-enforce-todo-dependencies t))
+  (setq org-enforce-todo-dependencies t)
 
   ;; TODO keywords
   (setq org-todo-keywords
@@ -74,10 +68,6 @@
                 ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
                 ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
                 ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
-
-  ;; Automatically change parent task from NEXT to TODO when gaining children
-  (add-hook 'org-after-todo-state-change-hook 'bh/mark-next-parent-tasks-todo 'append)
-  (add-hook 'org-clock-in-hook 'bh/mark-next-parent-tasks-todo 'append)
 
   ;; Tags
   ;; Tags with fast selection keys
@@ -120,6 +110,15 @@
 
   ;; Allow refile to create parent tasks with confirmation
   (setq org-refile-allow-creating-parent-nodes (quote confirm))
+  :config
+  ;; Generic
+  (bind-key* "C-c a" 'org-agenda)
+  (bind-key* "C-c c" 'org-capture)
+  (bind-key* "C-c l" 'org-store-link)
+
+  ;; Automatically change parent task from NEXT to TODO when gaining children
+  (add-hook 'org-after-todo-state-change-hook 'bh/mark-next-parent-tasks-todo 'append)
+  (add-hook 'org-clock-in-hook 'bh/mark-next-parent-tasks-todo 'append)
 
   ;; Functions
   (defun bh/show-org-agenda ()
@@ -139,8 +138,8 @@
   (defun bh/mark-next-parent-tasks-todo ()
     "Visit each parent task and change NEXT states to TODO."
     (let ((mystate (or (and (fboundp 'org-state)
-                            state)
-                       (nth 2 (org-heading-components)))))
+                         state)
+                      (nth 2 (org-heading-components)))))
       (when mystate
         (save-excursion
           (while (org-up-heading-safe)

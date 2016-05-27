@@ -41,6 +41,9 @@
   :config
   (add-hook 'scss-mode-hook 'syntax-color-hex))
 
+(req-package json-mode
+  :mode (("\\.json" . json-mode)))
+
 (defun syntax-color-hex ()
   "Syntax color hex color spec such as 「#ff1100」 in current buffer."
   (interactive)

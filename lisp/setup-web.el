@@ -1,11 +1,45 @@
-(eval-after-load "sgml-mode"
-  '(progn
-     (require 'tagedit)
-     (define-key html-mode-map (kbd "C-c C-w") 'html-wrap-in-tag)
-     (tagedit-add-experimental-features)
-     (add-hook 'html-mode-hook (lambda () (tagedit-mode 1)))))
+;;; setup-js.el --- Web/JS setup / options
+;;; Commentary:
+;;; Code:
+(require 'req-package)
 
-(setq sgml-basic-offset 4)
+(req-package web-mode
+  :require flycheck pretty-mode tagedit
+  :mode (("\\.jsx" . web-mode)
+         ("\\.js" . web-mode))
+  :config
+  ;; Support JSX in regular javascript files
+  (setq web-mode-content-types-alist
+        '(("jsx" . "\\.js[x]?\\'")))
+  ;; Setup indentation
+  (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+  (setq web-mode-markup-indent-offset 4)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 4)
+  ;; Use eslint
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  ;; Enable pretty-mode
+  (add-to-list 'pretty-modes-aliases '(web-mode . javascript-mode))
+  ;; Use tagedit
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (tagedit-mode t))))
+
+(req-package tern
+  :require auto-complete tern-auto-complete web-mode
+  :config
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (tern-mode t)))
+  (tern-ac-setup))
+
+(req-package css-mode
+  :config
+  (add-hook 'css-mode-hook 'syntax-color-hex))
+
+(req-package scss-mode
+  :config
+  (add-hook 'scss-mode-hook 'syntax-color-hex))
 
 (defun syntax-color-hex ()
   "Syntax color hex color spec such as 「#ff1100」 in current buffer."
@@ -19,15 +53,5 @@
           'face (list :background (match-string-no-properties 0)))))))
   (font-lock-fontify-buffer))
 
-(add-hook 'css-mode-hook 'syntax-color-hex)
-(add-hook 'scss-mode-hook 'syntax-color-hex)
-
-(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 4))
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-
-
 (provide 'setup-web)
+;;; setup-web.el ends here

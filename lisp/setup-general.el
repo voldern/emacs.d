@@ -31,10 +31,10 @@
 (setq auto-compression-mode t)
 
 ;; Save a list of recent files visited.
-(setq recentf-mode 1)
+(recentf-mode t)
 
 ;; Highlight matching parentheses when the point is on them.
-(setq show-paren-mode 1)
+(show-paren-mode t)
 
 ;; Enable column-number-mode
 (setq column-number-mode t)

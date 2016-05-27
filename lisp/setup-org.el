@@ -1,177 +1,150 @@
 ;;; setup-org.el --- org-mode setup / options
-
 ;;; Commentary:
-
 ;;; Code:
-(require 'org)
+(require 'req-package)
 
-(server-start)
-(require 'org-protocol)
+(req-package org
+  :require org-protocol setup-org-agenda setup-org-clock
+  :init
+  (setq org-directory "~/org")
+  (setq org-agenda-files (quote ("~/org"
+                                 "~/org/work")))
 
-(require 'setup-org-agenda)
-(require 'setup-org-clock)
+  (setq org-startup-indented t)
+  (setq org-hide-leading-stars nil)
+  (setq org-reverse-note-order nil)
 
-;;; Key bindings
-(global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-(global-set-key (kbd "<f9>") 'bh/show-org-agenda)
+  (setq org-show-following-heading t)
+  (setq org-show-hierarchy-above t)
+  (setq org-show-siblings (quote ((default))))
 
-(defun bh/show-org-agenda ()
-  (interactive)
-  (if org-agenda-sticky
-      (switch-to-buffer "*Org Agenda( )*")
-    (switch-to-buffer "*Org Agenda*"))
-  (delete-other-windows))
+  (setq org-deadline-warning-days 30)
 
-;;; Generic
-(setq org-directory "~/org")
-(setq org-agenda-files (quote ("~/org"
-                               "~/org/work")))
+  (setq org-log-done (quote time))
+  (setq org-log-into-drawer t)
+  (setq org-log-state-notes-insert-after-drawers nil)
 
-(setq org-startup-indented t)
-(setq org-hide-leading-stars nil)
-(setq org-reverse-note-order nil)
+  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
 
-(setq org-show-following-heading t)
-(setq org-show-hierarchy-above t)
-(setq org-show-siblings (quote ((default))))
+  ;; Bullet lists
+  (setq org-list-demote-modify-bullet (quote (("+" . "-")
+                                              ("*" . "-")
+                                              ("1." . "-")
+                                              ("1)" . "-")
+                                              ("A)" . "-")
+                                              ("B)" . "-")
+                                              ("a)" . "-")
+                                              ("b)" . "-")
+                                              ("A." . "-")
+                                              ("B." . "-")
+                                              ("a." . "-")
+                                              ("b." . "-"))))
 
-(setq org-deadline-warning-days 30)
+  ;; For tag searches ignore tasks with scheduled and deadline dates
+  (setq org-agenda-tags-todo-honor-ignore-options t)
 
-(setq org-log-done (quote time))
-(setq org-log-into-drawer t)
-(setq org-log-state-notes-insert-after-drawers nil)
+  (setq org-use-fast-todo-selection t)
+  (setq org-treat-S-cursor-todo-selection-as-state-change nil)
 
-(setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
+  (setq org-enforce-todo-dependencies t)
 
-;;; Bullet lists
-(setq org-list-demote-modify-bullet (quote (("+" . "-")
-                                            ("*" . "-")
-                                            ("1." . "-")
-                                            ("1)" . "-")
-                                            ("A)" . "-")
-                                            ("B)" . "-")
-                                            ("a)" . "-")
-                                            ("b)" . "-")
-                                            ("A." . "-")
-                                            ("B." . "-")
-                                            ("a." . "-")
-                                            ("b." . "-"))))
+  ;; TODO keywords
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
+  (setq org-todo-keyword-faces
+        (quote (("TODO" :foreground "red" :weight bold)
+                ("NEXT" :foreground "blue" :weight bold)
+                ("DONE" :foreground "forest green" :weight bold)
+                ("WAITING" :foreground "orange" :weight bold)
+                ("HOLD" :foreground "magenta" :weight bold)
+                ("CANCELLED" :foreground "forest green" :weight bold))))
 
-;;; Add support for thunderlink urls
-(org-add-link-type "thunderlink" 'org-thunderlink-open)
+  (setq org-todo-state-tags-triggers
+        (quote (("CANCELLED" ("CANCELLED" . t))
+                ("WAITING" ("WAITING" . t))
+                ("HOLD" ("WAITING") ("HOLD" . t))
+                (done ("WAITING") ("HOLD"))
+                ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
+                ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
+                ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
 
-(defun org-thunderlink-open (path)
-   "Opens a specified email in Thunderbird with the help of the add-on ThunderLink."
-   ;(message-box path)
-   (start-process "myname" nil "xdg-open" (concat "thunderlink:" path)))
+  ;; Tags
+  ;; Tags with fast selection keys
+  (setq org-tag-alist (quote (("WAITING" . ?w)
+                              ("HOLD" . ?h)
+                              ("PERSONAL" . ?P)
+                              ("WORK" . ?W)
+                              ("NOTE" . ?n)
+                              ("CANCELLED" . ?c)
+                              ("FLAGGED" . ??))))
 
-;;; TODO keywords
-(setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))))
-(setq org-todo-keyword-faces
-      (quote (("TODO" :foreground "red" :weight bold)
-              ("NEXT" :foreground "blue" :weight bold)
-              ("DONE" :foreground "forest green" :weight bold)
-              ("WAITING" :foreground "orange" :weight bold)
-              ("HOLD" :foreground "magenta" :weight bold)
-              ("CANCELLED" :foreground "forest green" :weight bold))))
+  ;; Allow setting single tags without the menu
+  (setq org-fast-tag-selection-single-key (quote expert))
 
-(setq org-todo-state-tags-triggers
-      (quote (("CANCELLED" ("CANCELLED" . t))
-              ("WAITING" ("WAITING" . t))
-              ("HOLD" ("WAITING") ("HOLD" . t))
-              (done ("WAITING") ("HOLD"))
-              ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
-              ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
-              ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
+  ;; Refile
+  (setq org-default-notes-file "~/org/refile.org")
+  (setq org-capture-templates
+        (quote (("t" "todo" entry (file "~/org/refile.org")
+                 "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+                ("r" "respond" entry (file "~/org/refile.org")
+                 "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+                ("n" "note" entry (file "~/org/refile.org")
+                 "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+                ("L" "org-protocol" entry (file "~/org/refile.org")
+                 "* TODO Review %c\n%U\n" :immediate-finish t)
+                ("p" "org-protocol" entry (file "~/org/refile.org")
+                 "* TODO Review %c\n%U\n" :immediate-finish t)
+                ("w" "org-protocol" entry (file "~/org/refile.org")
+                 "* TODO Review %c\n%U\n" :immediate-finish t))))
 
+  ;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
+  (setq org-refile-targets (quote ((nil :maxlevel . 9)
+                                   (org-agenda-files :maxlevel . 9))))
 
-; For tag searches ignore tasks with scheduled and deadline dates
-(setq org-agenda-tags-todo-honor-ignore-options t)
+  ;; Use full outline paths for refile targets - we file directly with IDO
+  (setq org-refile-use-outline-path t)
 
-(setq org-use-fast-todo-selection t)
-(setq org-treat-S-cursor-todo-selection-as-state-change nil)
+  ;; Targets complete directly with IDO
+  (setq org-outline-path-complete-in-steps nil)
 
-(setq org-enforce-todo-dependencies t)
+  ;; Allow refile to create parent tasks with confirmation
+  (setq org-refile-allow-creating-parent-nodes (quote confirm))
+  :config
+  ;; Generic
+  (bind-key* "C-c a" 'org-agenda)
+  (bind-key* "C-c c" 'org-capture)
+  (bind-key* "C-c l" 'org-store-link)
 
-;; Automatically change parent task from NEXT to TODO when gaining children
-(add-hook 'org-after-todo-state-change-hook 'bh/mark-next-parent-tasks-todo 'append)
-(add-hook 'org-clock-in-hook 'bh/mark-next-parent-tasks-todo 'append)
+  ;; Automatically change parent task from NEXT to TODO when gaining children
+  (add-hook 'org-after-todo-state-change-hook 'bh/mark-next-parent-tasks-todo 'append)
+  (add-hook 'org-clock-in-hook 'bh/mark-next-parent-tasks-todo 'append)
 
-;; Tags
-; Tags with fast selection keys
-(setq org-tag-alist (quote (("WAITING" . ?w)
-                            ("HOLD" . ?h)
-                            ("PERSONAL" . ?P)
-                            ("WORK" . ?W)
-                            ("NOTE" . ?n)
-                            ("CANCELLED" . ?c)
-                            ("FLAGGED" . ??))))
+  ;; Functions
+  (defun bh/show-org-agenda ()
+    "Show org agenda."
+    (interactive)
+    (if org-agenda-sticky
+        (switch-to-buffer "*Org Agenda( )*")
+      (switch-to-buffer "*Org Agenda*"))
+    (delete-other-windows))
 
-; Allow setting single tags without the menu
-(setq org-fast-tag-selection-single-key (quote expert))
+                                        ; Exclude DONE state tasks from refile targets
+  (defun bh/verify-refile-target ()
+    "Exclude todo keywords with a done state from refile targets."
+    (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+  (setq org-refile-target-verify-function 'bh/verify-refile-target)
 
-;;; Refile
-(setq org-default-notes-file "~/org/refile.org")
-(setq org-capture-templates
-      (quote (("t" "todo" entry (file "~/org/refile.org")
-               "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("r" "respond" entry (file "~/org/refile.org")
-               "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-              ("n" "note" entry (file "~/org/refile.org")
-               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("L" "org-protocol" entry (file "~/org/refile.org")
-               "* TODO Review %c\n%U\n" :immediate-finish t)
-              ("p" "org-protocol" entry (file "~/org/refile.org")
-               "* TODO Review %c\n%U\n" :immediate-finish t)
-              ("w" "org-protocol" entry (file "~/org/refile.org")
-               "* TODO Review %c\n%U\n" :immediate-finish t))))
-
-; Targets include this file and any file contributing to the agenda - up to 9 levels deep
-(setq org-refile-targets (quote ((nil :maxlevel . 9)
-                                 (org-agenda-files :maxlevel . 9))))
-
-; Use full outline paths for refile targets - we file directly with IDO
-(setq org-refile-use-outline-path t)
-
-; Targets complete directly with IDO
-(setq org-outline-path-complete-in-steps nil)
-
-; Allow refile to create parent tasks with confirmation
-(setq org-refile-allow-creating-parent-nodes (quote confirm))
-
-; Exclude DONE state tasks from refile targets
-(defun bh/verify-refile-target ()
-  "Exclude todo keywords with a done state from refile targets."
-  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-
-(setq org-refile-target-verify-function 'bh/verify-refile-target)
-
-;;; Clocking
-;; Remove empty LOGBOOK drawers on clock out
-(defun bh/remove-empty-drawer-on-clock-out ()
-  (interactive)
-  (save-excursion
-    (beginning-of-line 0)
-    (org-remove-empty-drawer-at "LOGBOOK" (point))))
-
-(add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
-
-;;; Functions
-(defun bh/mark-next-parent-tasks-todo ()
-  "Visit each parent task and change NEXT states to TODO"
-  (let ((mystate (or (and (fboundp 'org-state)
-                          state)
-                     (nth 2 (org-heading-components)))))
-    (when mystate
-      (save-excursion
-        (while (org-up-heading-safe)
-          (when (member (nth 2 (org-heading-components)) (list "NEXT"))
-            (org-todo "TODO")))))))
+  (defun bh/mark-next-parent-tasks-todo ()
+    "Visit each parent task and change NEXT states to TODO."
+    (let ((mystate (or (and (fboundp 'org-state)
+                         state)
+                      (nth 2 (org-heading-components)))))
+      (when mystate
+        (save-excursion
+          (while (org-up-heading-safe)
+            (when (member (nth 2 (org-heading-components)) (list "NEXT"))
+              (org-todo "TODO"))))))))
 
 (provide 'setup-org)
 ;;; setup-org.el ends here

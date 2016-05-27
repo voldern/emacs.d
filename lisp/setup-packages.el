@@ -159,5 +159,9 @@
          ("C-ø p" . mc/mark-previous-like-this)
          ("C-ø a" . mc/mark-all-like-this)))
 
+(req-package dumb-jump
+  :config
+  (dumb-jump-mode))
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

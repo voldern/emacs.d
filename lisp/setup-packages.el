@@ -142,5 +142,10 @@
   :config
   (global-pretty-mode t))
 
+(req-package helm-flycheck
+  :require flycheck
+  :bind (:map flycheck-mode-map
+              ("C-c ! h" . helm-flycheck)))
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

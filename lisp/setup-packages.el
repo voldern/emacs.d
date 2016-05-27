@@ -101,6 +101,11 @@
   :config
   (helm-flx-mode t))
 
+(req-package helm-flycheck
+  :require flycheck
+  :bind (:map flycheck-mode-map
+              ("C-c ! h" . helm-flycheck)))
+
 ;; Use projectile and helm-projectile
 (req-package projectile
   :config
@@ -138,14 +143,10 @@
   :config
   (global-aggressive-indent-mode t))
 
+;; Pretty mode
 (req-package pretty-mode
   :config
   (global-pretty-mode t))
-
-(req-package helm-flycheck
-  :require flycheck
-  :bind (:map flycheck-mode-map
-              ("C-c ! h" . helm-flycheck)))
 
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

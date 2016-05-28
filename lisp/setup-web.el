@@ -29,12 +29,16 @@
               (rainbow-mode t))))
 
 (req-package tern
-  :require auto-complete tern-auto-complete web-mode
+  :require web-mode
   :config
   (add-hook 'web-mode-hook
             (lambda ()
-              (tern-mode t)))
-  (tern-ac-setup))
+              (tern-mode t))))
+
+(req-package company-tern
+  :require company
+  :config
+  (add-to-list 'company-backends 'company-tern))
 
 (req-package css-mode
   :require rainbow-mode

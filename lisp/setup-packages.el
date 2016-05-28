@@ -162,10 +162,12 @@
          ("C-ø p" . mc/mark-previous-like-this)
          ("C-ø a" . mc/mark-all-like-this)))
 
+;; Dumb jump
 (req-package dumb-jump
   :config
   (dumb-jump-mode))
 
+;; Langtool
 (req-package langtool
   :bind (("C-x M-l c" . langtool-check)
          ("C-x M-l d" . langtool-check-done)
@@ -174,6 +176,14 @@
   :init
   (setq langtool-java-classpath "/usr/share/languagetool:/usr/share/java/languagetool/*")
   (setq langtool-default-language "en-US"))
+
+;; Company
+(req-package company
+  :require company-quickhelp
+  :config
+  (company-mode t)
+  (add-hook 'after-init-hook 'global-company-mode)
+  (company-quickhelp-mode t))
 
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

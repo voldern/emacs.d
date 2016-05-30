@@ -27,6 +27,7 @@
             (lambda ()
               (tagedit-mode t)
               (rainbow-mode t)
+              (flycheck-mode t)
               (setq-local helm-dash-docsets '("JavaScript" "React")))))
 
 (req-package tern

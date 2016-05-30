@@ -4,7 +4,7 @@
 (require 'req-package)
 
 (req-package web-mode
-  :require flycheck pretty-mode tagedit rainbow-mode
+  :require flycheck pretty-mode tagedit rainbow-mode helm-dash
   :mode (("\\.jsx" . web-mode)
          ("\\.js" . web-mode))
   :config
@@ -26,7 +26,8 @@
   (add-hook 'web-mode-hook
             (lambda ()
               (tagedit-mode t)
-              (rainbow-mode t))))
+              (rainbow-mode t)
+              (setq-local helm-dash-docsets '("JavaScript" "React")))))
 
 (req-package tern
   :require web-mode

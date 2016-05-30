@@ -105,9 +105,14 @@
   (helm-flx-mode t))
 
 (req-package helm-flycheck
-  :require flycheck
+  :require flycheck helm
   :bind (:map flycheck-mode-map
               ("C-c ! h" . helm-flycheck)))
+
+(req-package helm-dash
+  :require helm
+  :config
+  (setq helm-dash-common-docsets '("AWS_JavaScript" "Elasticsearch")))
 
 ;; Use projectile and helm-projectile
 (req-package projectile

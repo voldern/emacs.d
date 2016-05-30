@@ -114,6 +114,11 @@
   :config
   (setq helm-dash-common-docsets '("AWS_JavaScript" "Elasticsearch")))
 
+(req-package helm-flyspell
+  :require helm flyspell
+  :config
+  (bind-key* "C-;" 'helm-flyspell-correct))
+
 ;; Use projectile and helm-projectile
 (req-package projectile
   :config
@@ -189,6 +194,17 @@
   (company-mode t)
   (add-hook 'after-init-hook 'global-company-mode)
   (company-quickhelp-mode t))
+
+;; Ispell
+(req-package ispell
+  :init
+  ;; Support aspell in flyspell
+  (setq ispell-list-command "--list"))
+
+;; Flyspell
+(req-package flyspell
+  :config
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

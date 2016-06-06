@@ -206,5 +206,15 @@
   :config
   (add-hook 'prog-mode-hook 'flyspell-prog-mode))
 
+;; Markdown
+(req-package markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode ("\\.md" . gfm-mode))
+
+(req-package gh-md
+  :require markdown-mode
+  :bind (:map markdown-mode-map
+              ("C-c C-p" . gh-md-render-buffer)))
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

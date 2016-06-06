@@ -15,7 +15,9 @@
 ;; Load exec paths from the shell
 (req-package exec-path-from-shell
   :config
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK"))
 
 ;; Powerline
 (req-package smart-mode-line

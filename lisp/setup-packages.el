@@ -14,8 +14,6 @@
 
 ;; Load exec paths from the shell
 (req-package exec-path-from-shell
-  :init
-  (setq exec-path-from-shell-arguments '("-l"))
   :config
   (exec-path-from-shell-initialize))
 

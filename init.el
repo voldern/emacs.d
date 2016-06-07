@@ -14,10 +14,10 @@
 (setq custom-file (concat dotfiles-dir "custom.el"))
 (load custom-file)
 
-(req-package setup-general)
-(req-package setup-packages)
-(req-package setup-web)
-(req-package setup-org)
+(require 'setup-general)
+(require 'setup-packages)
+(require 'setup-web)
+(require 'setup-org)
 
 (req-package-finish)
 

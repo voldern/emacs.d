@@ -216,5 +216,9 @@
   :bind (:map markdown-mode-map
               ("C-c C-p" . gh-md-render-buffer)))
 
+;; Lua
+(req-package lua-mode
+  :mode ("\\.lua" . lua-mode))
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

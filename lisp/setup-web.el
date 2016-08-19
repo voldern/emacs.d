@@ -4,9 +4,9 @@
 (require 'req-package)
 
 (req-package web-mode
-  :require flycheck pretty-mode tagedit rainbow-mode helm-dash
+  :require flycheck pretty-mode tagedit rainbow-mode helm-dash whitespace-cleanup-mode
   :mode (("\\.jsx" . web-mode)
-         ("\\.js" . web-mode))
+         ("\\.js$" . web-mode))
   :config
   ;; Support JSX in regular javascript files
   (setq web-mode-content-types-alist
@@ -28,6 +28,7 @@
               (tagedit-mode t)
               (rainbow-mode t)
               (flycheck-mode t)
+              (whitespace-cleanup-mode)
               (setq-local helm-dash-docsets '("JavaScript" "React")))))
 
 (req-package tern

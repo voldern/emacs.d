@@ -221,5 +221,12 @@
 (req-package lua-mode
   :mode ("\\.lua" . lua-mode))
 
+;; Smartparens
+(req-package smartparens
+  :diminish smartparens-mode
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode t))
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

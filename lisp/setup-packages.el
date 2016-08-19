@@ -154,7 +154,8 @@
 ;; Agressive indent mode
 (req-package aggressive-indent
   :config
-  (global-aggressive-indent-mode t))
+  (global-aggressive-indent-mode t)
+  (add-to-list 'aggressive-indent-excluded-modes 'web-mode))
 
 ;; Pretty mode
 (req-package pretty-mode

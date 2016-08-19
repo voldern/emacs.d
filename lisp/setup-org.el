@@ -120,6 +120,11 @@
   (add-hook 'org-after-todo-state-change-hook 'bh/mark-next-parent-tasks-todo 'append)
   (add-hook 'org-clock-in-hook 'bh/mark-next-parent-tasks-todo 'append)
 
+  ;; Babel
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((elasticsearch . t)))
+
   ;; Functions
   (defun bh/show-org-agenda ()
     "Show org agenda."

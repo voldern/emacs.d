@@ -221,6 +221,10 @@
 (req-package lua-mode
   :mode ("\\.lua" . lua-mode))
 
+;; Elasticsearch
+(req-package es-mode
+  :commands (es-mode))
+
 ;; Smartparens
 (req-package smartparens
   :diminish smartparens-mode

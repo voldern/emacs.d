@@ -5,8 +5,8 @@
 
 ;;; General
 ;; Font
-(when (member "Envy Code R" (font-family-list))
-  (add-to-list 'default-frame-alist '(font .  "Envy Code R-12")))
+(when (member "Source Code Pro for Powerline" (font-family-list))
+  (add-to-list 'default-frame-alist '(font .  "Source Code Pro for Powerline-12")))
 
 ;; UTF-8 all the things
 (set-terminal-coding-system 'utf-8)

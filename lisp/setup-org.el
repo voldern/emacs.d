@@ -4,7 +4,7 @@
 (require 'req-package)
 
 (req-package org
-  :require org-protocol setup-org-agenda setup-org-clock
+  :require org-protocol setup-org-agenda setup-org-clock org-bullets
   :init
   (setq org-directory "~/org")
   (setq org-agenda-files (quote ("~/org"
@@ -119,6 +119,9 @@
   ;; Automatically change parent task from NEXT to TODO when gaining children
   (add-hook 'org-after-todo-state-change-hook 'bh/mark-next-parent-tasks-todo 'append)
   (add-hook 'org-clock-in-hook 'bh/mark-next-parent-tasks-todo 'append)
+
+  ;; Use org-bullets
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
   ;; Babel
   (org-babel-do-load-languages

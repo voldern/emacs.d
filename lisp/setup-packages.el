@@ -5,7 +5,7 @@
 (defvar dotfiles-dir)
 
 ;; Use twilight theme
-(req-package twilight-theme)
+(req-package material-theme)
 
 ;; Make buffer names unique
 (req-package uniquify

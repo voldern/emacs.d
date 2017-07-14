@@ -19,7 +19,7 @@
   (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
   (setq web-mode-markup-indent-offset 4)
   (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 4)
+  (setq web-mode-code-indent-offset 2)
   (setq web-mode-enable-current-column-highlight t)
   ;; Use eslint
   (flycheck-add-mode 'javascript-eslint 'web-mode)

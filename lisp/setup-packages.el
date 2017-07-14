@@ -232,5 +232,8 @@
   (require 'smartparens-config)
   (smartparens-global-mode t))
 
+;; Rainbow
+(req-package rainbow-mode)
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

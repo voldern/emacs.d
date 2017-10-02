@@ -255,5 +255,8 @@
 ;; Rainbow
 (req-package rainbow-mode)
 
+;; Yaml mode
+(req-package yaml-mode)
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

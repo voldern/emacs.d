@@ -137,18 +137,34 @@
 (req-package magit
   :bind ("C-x g" . magit-status))
 
-;; Avy for fast jumping
-(req-package avy
-  :bind ("C-c j" . avy-goto-word-or-subword-1))
-
-;; Use rainbow-delimiters to display unbalanced delimiters
-;; Ref: http://timothypratley.blogspot.no/2015/07/seven-specialty-emacs-settings-with-big.html
-(req-package rainbow-delimiters
+(req-package magithub
+  :require magit
   :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-  (set-face-attribute 'rainbow-delimiters-unmatched-face nil
-                      :foreground 'unspecified
-                      :inherit 'error))
+  (magithub-feature-autoinject t)
+  (defun magithub--url->domain (url)
+    "Tries to parse a remote url into a domain"
+    (cdr (assq 'domain (magithub--parse-url url))))
+
+  (add-hook 'magit-status-mode-hook '(lambda ()
+                                       (if (magithub-github-repository-p)
+                                           (let* ((remote-url (magit-get "remote" (magithub-source--remote) "url"))
+                                                  (domain (magithub--url->domain remote-url)))
+                                             (message domain)
+                                             (unless (string-equal "github.com" domain)
+                                               (setq-local ghub-base-url (concat "https://" domain "/api/v3"))))))))
+
+;; Avy for fast jumping
+  (req-package avy
+    :bind ("C-c j" . avy-goto-word-or-subword-1))
+
+  ;; Use rainbow-delimiters to display unbalanced delimiters
+  ;; Ref: http://timothypratley.blogspot.no/2015/07/seven-specialty-emacs-settings-with-big.html
+  (req-package rainbow-delimiters
+    :config
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+    (set-face-attribute 'rainbow-delimiters-unmatched-face nil
+                        :foreground 'unspecified
+                        :inherit 'error))
 
 ;; Which key
 (req-package which-key

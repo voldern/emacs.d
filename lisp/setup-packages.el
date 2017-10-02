@@ -129,6 +129,10 @@
   :require helm projectile
   :bind ("C-c h" . helm-projectile))
 
+(req-package helm-ag
+  :require helm projectile
+  :bind ("C-c p s a" . helm-projectile-ag))
+
 ;; Magit
 (req-package magit
   :bind ("C-x g" . magit-status))

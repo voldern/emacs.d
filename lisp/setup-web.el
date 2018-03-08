@@ -6,7 +6,9 @@
 (req-package web-mode
   :require flycheck pretty-mode tagedit rainbow-mode helm-dash whitespace-cleanup-mode
   :mode (("\\.jsx" . web-mode)
-         ("\\.js$" . web-mode))
+         ("\\.js$" . web-mode)
+         ("\\.ts$" . web-mode)
+         ("\\.tsx$" . web-mode))
   :config
   ;; Support JSX in regular javascript files
   (setq web-mode-content-types-alist
@@ -63,6 +65,24 @@
             (lambda ()
               (make-local-variable 'js-indent-level)
               (setq js-indent-level 2))))
+
+(req-package typescript-mode
+  :config
+  (setq typescript-indent-level 2))
+
+(req-package tide
+  :require typescript-mode web-mode flycheck
+  :hook web-mode
+  :config
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (flycheck-mode +1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (eldoc-mode +1)
+    (tide-hl-identifier-mode +1))
+  (setup-tide-mode)
+  (flycheck-add-mode 'typescript-tslint 'web-mode))
 
 (provide 'setup-web)
 ;;; setup-web.el ends here

@@ -4,7 +4,7 @@
 (require 'req-package)
 
 (req-package org
-  :require org-protocol setup-org-agenda setup-org-clock org-bullets
+  :require org-bullets
   :init
   (setq org-directory "~/org")
   (setq org-agenda-files (quote ("~/org"

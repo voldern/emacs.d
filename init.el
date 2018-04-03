@@ -19,6 +19,8 @@
 (require 'setup-web)
 (require 'setup-org)
 
+(setq use-package-always-ensure t)
+
 (req-package-finish)
 
 (provide 'init)

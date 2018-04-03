@@ -253,5 +253,13 @@
 ;; Yaml mode
 (req-package yaml-mode)
 
+;; Go
+(req-package go-mode
+  :require company-go
+  :config
+  (setq gofmt-command "goimports")
+  (add-to-list 'company-backends 'company-go)
+  (add-hook 'before-save-hook 'gofmt-before-save))
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

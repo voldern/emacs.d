@@ -4,6 +4,7 @@
 (require 'req-package)
 
 (req-package org-clock
+  :force t
   :config
   ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
   (setq org-clock-history-length 23)
@@ -33,10 +34,10 @@ Switch projects and subprojects from NEXT back to TODO"
     (when (not (and (boundp 'org-capture-mode) org-capture-mode))
       (cond
        ((and (member (org-get-todo-state) (list "TODO"))
-             (bh/is-task-p))
+           (bh/is-task-p))
         "NEXT")
        ((and (member (org-get-todo-state) (list "NEXT"))
-             (bh/is-project-p))
+           (bh/is-project-p))
         "TODO"))))
 
   (defun bh/remove-empty-drawer-on-clock-out ()

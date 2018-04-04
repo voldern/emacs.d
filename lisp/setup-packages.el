@@ -7,6 +7,12 @@
 ;; Use twilight theme
 (req-package material-theme)
 
+;; Make buffer names unique
+(req-package uniquify
+  :force t
+  :config
+  (setq uniquify-buffer-name-style 'forward))
+
 ;; Load exec paths from the shell
 (req-package exec-path-from-shell
   :config

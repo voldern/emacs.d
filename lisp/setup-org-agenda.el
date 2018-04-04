@@ -4,6 +4,7 @@
 (require 'req-package)
 
 (req-package org-agenda
+  :force t
   :config
   ;; Disable default stuck mode
   (setq org-stuck-projects (quote ("" nil nil "")))

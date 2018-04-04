@@ -1,6 +1,13 @@
 ;;; init.el --- Initial emacs configuration file
 ;;; Commentary:
 ;;; Code:
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (require 'cask "/usr/share/emacs/site-lisp/cask/cask.el")
 (cask-initialize)
 
@@ -18,6 +25,9 @@
 (require 'setup-packages)
 (require 'setup-web)
 (require 'setup-org)
+(require 'setup-rust)
+
+(setq use-package-always-ensure t)
 
 (setq use-package-always-ensure t)
 

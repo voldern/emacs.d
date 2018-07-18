@@ -4,7 +4,7 @@
 (require 'req-package)
 
 (req-package web-mode
-  :require flycheck pretty-mode tagedit rainbow-mode helm-dash whitespace-cleanup-mode
+  :require flycheck pretty-mode tagedit rainbow-mode helm-dash whitespace-cleanup-mode prettier-js
   :mode (("\\.jsx" . web-mode)
          ("\\.js$" . web-mode)
          ("\\.ts$" . web-mode)
@@ -33,7 +33,8 @@
               (tagedit-mode t)
               (rainbow-mode t)
               (flycheck-mode t)
-              (whitespace-cleanup-mode)
+              (prettier-js-mode t)
+              (whitespace-cleanup-mode t)
               (setq-local helm-dash-docsets '("JavaScript" "React")))))
 
 (req-package tern

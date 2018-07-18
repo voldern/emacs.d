@@ -215,7 +215,8 @@
   :config
   (company-mode t)
   (add-hook 'after-init-hook 'global-company-mode)
-  (company-quickhelp-mode t))
+  (company-quickhelp-mode t)
+  (setq company-tooltip-align-annotations t))
 
 ;; Ispell
 (req-package ispell

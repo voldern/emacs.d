@@ -138,34 +138,40 @@
 (req-package magit
   :bind ("C-x g" . magit-status))
 
-(req-package magithub
+(req-package forge
   :require magit
   :config
-  (magithub-feature-autoinject t)
-  (defun magithub--url->domain (url)
-    "Tries to parse a remote url into a domain"
-    (cdr (assq 'domain (magithub--parse-url url))))
+  (push '("github.schibsted.io" "github.schibsted.io/api/v3" "github.schibsted.io" forge-github-repository) forge-alist))
 
-  (add-hook 'magit-status-mode-hook '(lambda ()
-                                       (if (magithub-github-repository-p)
-                                           (let* ((remote-url (magit-get "remote" (magithub-source--remote) "url"))
-                                                  (domain (magithub--url->domain remote-url)))
-                                             (message domain)
-                                             (unless (string-equal "github.com" domain)
-                                               (setq-local ghub-base-url (concat "https://" domain "/api/v3"))))))))
+;; (req-package magithub
+;;   :require magit
+;;   :config
+;;   (magithub-feature-autoinject t)
+;;   (defun magithub--url->domain (url)
+;;     "Tries to parse a remote url into a domain"
+;;     (cdr (assq 'domain (magithub--parse-url url))))
+
+;;   (add-hook 'magit-status-mode-hook '(lambda ()
+;;                                        (if (magithub-github-repository-p)
+;;                                            (let* ((remote-url (magit-get "remote" (magithub-source--remote) "url"))
+;;                                                   (domain (magithub--url->domain remote-url)))
+;;                                              (message domain)
+;;                                              (unless (string-equal "github.com" domain)
+;;                                                (setq-local ghub-base-url (concat "https://" domain "/api/v3")))))))
+;;   )
 
 ;; Avy for fast jumping
-  (req-package avy
-    :bind ("C-c j" . avy-goto-word-or-subword-1))
+(req-package avy
+  :bind ("C-c j" . avy-goto-word-or-subword-1))
 
-  ;; Use rainbow-delimiters to display unbalanced delimiters
-  ;; Ref: http://timothypratley.blogspot.no/2015/07/seven-specialty-emacs-settings-with-big.html
-  (req-package rainbow-delimiters
-    :config
-    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-    (set-face-attribute 'rainbow-delimiters-unmatched-face nil
-                        :foreground 'unspecified
-                        :inherit 'error))
+;; Use rainbow-delimiters to display unbalanced delimiters
+;; Ref: http://timothypratley.blogspot.no/2015/07/seven-specialty-emacs-settings-with-big.html
+(req-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  (set-face-attribute 'rainbow-delimiters-unmatched-face nil
+                      :foreground 'unspecified
+                      :inherit 'error))
 
 ;; Which key
 (req-package which-key
@@ -260,12 +266,17 @@
 ;; Yaml mode
 (req-package yaml-mode)
 
+(req-package company-go
+  :load-path "packages/"
+  :config
+  (add-to-list 'company-backends 'company-go))
+
 ;; Go
 (req-package go-mode
-  :require company-go
+  ;; :require company-go
   :config
   (setq gofmt-command "goimports")
-  (add-to-list 'company-backends 'company-go)
+  ;; (add-to-list 'company-backends 'company-go)
   (add-hook 'before-save-hook 'gofmt-before-save))
 
 (provide 'setup-packages)

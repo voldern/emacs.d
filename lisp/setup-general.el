@@ -5,8 +5,8 @@
 
 ;;; General
 ;; Font
-(when (member "Source Code Pro for Powerline" (font-family-list))
-  (add-to-list 'default-frame-alist '(font .  "Source Code Pro for Powerline-12")))
+(when (member "Iosevka" (font-family-list))
+  (add-to-list 'default-frame-alist '(font .  "Iosevka-12")))
 
 ;; UTF-8 all the things
 (set-terminal-coding-system 'utf-8)

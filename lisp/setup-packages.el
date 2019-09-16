@@ -128,11 +128,8 @@
 
 (req-package helm-projectile
   :require helm projectile
-  :bind ("C-c h" . helm-projectile))
-
-(req-package helm-ag
-  :require helm projectile
-  :bind ("C-c p s a" . helm-projectile-ag))
+  :bind (("C-c h" . helm-projectile)
+         ("C-c p r" . helm-projectile-rg)))
 
 ;; Magit
 (req-package magit

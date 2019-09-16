@@ -8,21 +8,26 @@
   :mode (("\\.jsx" . web-mode)
          ("\\.js$" . web-mode)
          ("\\.ts$" . web-mode)
-         ("\\.tsx$" . web-mode))
+         ("\\.tsx$" . web-mode)
+         ("\\.html$" . web-mode))
+  :init
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-enable-current-column-highlight t)
   :config
   ;; Support JSX in regular javascript files
   (setq web-mode-content-types-alist
         '(("jsx" . "\\.js[x]?\\'")))
+  ;; Use Django by default in html templates
+  (setq web-mode-engines-alist
+        '(("django"    . "\\.html\\'")))
   ;; Setup indentation
   (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-quotes" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-enable-current-column-highlight t)
   ;; Use eslint
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   ;; Enable pretty-mode

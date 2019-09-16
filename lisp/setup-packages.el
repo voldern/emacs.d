@@ -135,21 +135,25 @@
 (req-package magit
   :bind ("C-x g" . magit-status))
 
-(req-package magithub
-  :require magit
-  :config
-  (magithub-feature-autoinject t)
-  (defun magithub--url->domain (url)
-    "Tries to parse a remote url into a domain"
-    (cdr (assq 'domain (magithub--parse-url url))))
+(req-package forge
+  :after magit)
 
-  (add-hook 'magit-status-mode-hook '(lambda ()
-                                       (if (magithub-github-repository-p)
-                                           (let* ((remote-url (magit-get "remote" (magithub-source--remote) "url"))
-                                                  (domain (magithub--url->domain remote-url)))
-                                             (message domain)
-                                             (unless (string-equal "github.com" domain)
-                                               (setq-local ghub-base-url (concat "https://" domain "/api/v3"))))))))
+;; (req-package magithub
+;;   :require magit
+;;   :config
+;;   (magithub-feature-autoinject t)
+;;   (defun magithub--url->domain (url)
+;;     "Tries to parse a remote url into a domain"
+;;     (cdr (assq 'domain (magithub--parse-url url))))
+
+;;   (add-hook 'magit-status-mode-hook '(lambda ()
+;;                                        (if (magithub-github-repository-p)
+;;                                            (let* ((remote-url (magit-get "remote" (magithub-source--remote) "url"))
+;;                                                   (domain (magithub--url->domain remote-url)))
+;;                                              (message domain)
+;;                                              (unless (string-equal "github.com" domain)
+;;                                                (setq-local ghub-base-url (concat "https://" domain "/api/v3")))))))
+;;   )
 
 ;; Avy for fast jumping
   (req-package avy

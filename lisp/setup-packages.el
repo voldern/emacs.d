@@ -269,5 +269,20 @@
   (add-to-list 'company-backends 'company-go)
   (add-hook 'before-save-hook 'gofmt-before-save))
 
+(req-package elpy
+  :require pyenv-mode
+  :init
+  (elpy-enable))
+
+(req-package pyenv-mode
+  :config
+  (defun projectile-pyenv-mode-set ()
+    "Set pyenv version matching project name."
+    (let ((project (projectile-project-name)))
+      (if (member project (pyenv-mode-versions))
+          (pyenv-mode-set project)
+        (pyenv-mode-unset))))
+  (add-hook 'projectile-after-switch-project-hook 'projectile-pyenv-mode-set))
+
 (provide 'setup-packages)
 ;;; setup-packages.el ends here

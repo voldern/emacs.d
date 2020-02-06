@@ -156,17 +156,17 @@
 ;;   )
 
 ;; Avy for fast jumping
-  (req-package avy
-    :bind ("C-c j" . avy-goto-word-or-subword-1))
+(req-package avy
+  :bind ("C-c j" . avy-goto-word-or-subword-1))
 
-  ;; Use rainbow-delimiters to display unbalanced delimiters
-  ;; Ref: http://timothypratley.blogspot.no/2015/07/seven-specialty-emacs-settings-with-big.html
-  (req-package rainbow-delimiters
-    :config
-    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-    (set-face-attribute 'rainbow-delimiters-unmatched-face nil
-                        :foreground 'unspecified
-                        :inherit 'error))
+;; Use rainbow-delimiters to display unbalanced delimiters
+;; Ref: http://timothypratley.blogspot.no/2015/07/seven-specialty-emacs-settings-with-big.html
+(req-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  (set-face-attribute 'rainbow-delimiters-unmatched-face nil
+                      :foreground 'unspecified
+                      :inherit 'error))
 
 ;; Which key
 (req-package which-key

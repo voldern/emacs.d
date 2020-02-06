@@ -4,7 +4,7 @@
 (require 'req-package)
 
 (req-package web-mode
-  :require flycheck pretty-mode tagedit rainbow-mode helm-dash whitespace-cleanup-mode prettier-js
+  :require flycheck pretty-mode tagedit helm-dash whitespace-cleanup-mode prettier-js
   :mode (("\\.jsx" . web-mode)
          ("\\.js$" . web-mode)
          ("\\.ts$" . web-mode)
@@ -36,7 +36,6 @@
   (add-hook 'web-mode-hook
             (lambda ()
               (tagedit-mode t)
-              (rainbow-mode t)
               (flycheck-mode t)
               (prettier-js-mode t)
               (whitespace-cleanup-mode t)
@@ -54,15 +53,9 @@
   :config
   (add-to-list 'company-backends 'company-tern))
 
-(req-package css-mode
-  :require rainbow-mode
-  :config
-  (add-hook 'css-mode-hook 'rainbow-mode))
+(req-package css-mode)
 
-(req-package scss-mode
-  :require rainbow-mode
-  :config
-  (add-hook 'scss-mode-hook 'rainbow-mode))
+(req-package scss-mode)
 
 (req-package json-mode
   :mode (("\\.json" . json-mode))

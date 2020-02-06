@@ -30,6 +30,7 @@
   (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
   ;; Use eslint
   (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append)
   ;; Enable pretty-mode
   (add-to-list 'pretty-modes-aliases '(web-mode . javascript-mode))
   ;; Use tagedit
@@ -39,19 +40,22 @@
               (flycheck-mode t)
               (prettier-js-mode t)
               (whitespace-cleanup-mode t)
-              (setq-local helm-dash-docsets '("JavaScript" "React")))))
+              (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                (setup-tide-mode))
+              ;; (setq-local helm-dash-docsets '("JavaScript" "React"))
+              )))
 
-(req-package tern
-  :require web-mode
-  :config
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (tern-mode t))))
+;; (req-package tern
+;;   :require web-mode
+;;   :config
+;;   (add-hook 'web-mode-hook
+;;             (lambda ()
+;;               (tern-mode t))))
 
-(req-package company-tern
-  :require company
-  :config
-  (add-to-list 'company-backends 'company-tern))
+;; (req-package company-tern
+;;   :require company
+;;   :config
+;;   (add-to-list 'company-backends 'company-tern))
 
 (req-package css-mode)
 
@@ -70,8 +74,8 @@
   (setq typescript-indent-level 2))
 
 (req-package tide
-  :require typescript-mode web-mode flycheck
-  :hook web-mode
+  :require typescript-mode
+  :after (typescript-mode company flycheck)
   :config
   (defun setup-tide-mode ()
     (interactive)
@@ -79,9 +83,11 @@
     (flycheck-mode +1)
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
     (eldoc-mode +1)
-    (tide-hl-identifier-mode +1))
-  (setup-tide-mode)
-  (flycheck-add-mode 'typescript-tslint 'web-mode))
+    (tide-hl-identifier-mode +1)
+    (company-mode +1))
+  (add-hook 'typescript-mode-hook #'setup-tide-mode)
+  ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
+  )
 
 (provide 'setup-web)
 ;;; setup-web.el ends here

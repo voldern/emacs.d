@@ -217,6 +217,8 @@
   (company-mode t)
   (add-hook 'after-init-hook 'global-company-mode)
   (company-quickhelp-mode t)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1)
   (setq company-tooltip-align-annotations t))
 
 ;; Ispell
@@ -261,13 +263,29 @@
 ;; Yaml mode
 (req-package yaml-mode)
 
+;; Yasnippet
+(req-package yasnippet
+  :hook (go-mode . yas-minor-mode))
+
+;; LSP
+(req-package lsp-mode
+  :require lsp-ui
+  :hook (go-mode . lsp-deferred)
+  :config
+  (lsp-register-custom-settings
+   '(("gopls.completeUnimported" t t)
+     ("gopls.staticcheck" t t))))
+
 ;; Go
 (req-package go-mode
-  :require company-go
+  :require lsp-mode company-lsp yasnippet
   :config
-  (setq gofmt-command "goimports")
-  (add-to-list 'company-backends 'company-go)
-  (add-hook 'before-save-hook 'gofmt-before-save))
+  ;; (setq gofmt-command "goimports")
+  (add-to-list 'company-backends 'company-lsp)
+  ;; (add-hook 'before-save-hook 'gofmt-before-save)
+  (add-hook 'before-save-hook 'lsp-format-buffer)
+  (add-hook 'before-save-hook 'lsp-organize-imports)
+  )
 
 (req-package elpy
   :require pyenv-mode

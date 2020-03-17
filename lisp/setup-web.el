@@ -9,7 +9,8 @@
          ("\\.js$" . web-mode)
          ("\\.ts$" . web-mode)
          ("\\.tsx$" . web-mode)
-         ("\\.html$" . web-mode))
+         ("\\.html$" . web-mode)
+         ("\\.vue$" . web-mode))
   :init
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)

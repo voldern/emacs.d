@@ -3,8 +3,9 @@
 ;;; Code:
 (require 'req-package)
 
-(req-package org
-  :require org-bullets
+(use-package org-bullets)
+
+(use-package org
   :init
   (setq org-directory "~/org")
   (setq org-agenda-files (quote ("~/org"
@@ -146,8 +147,8 @@
   (defun bh/mark-next-parent-tasks-todo ()
     "Visit each parent task and change NEXT states to TODO."
     (let ((mystate (or (and (fboundp 'org-state)
-                         state)
-                      (nth 2 (org-heading-components)))))
+                            state)
+                       (nth 2 (org-heading-components)))))
       (when mystate
         (save-excursion
           (while (org-up-heading-safe)

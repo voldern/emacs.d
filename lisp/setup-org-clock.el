@@ -3,8 +3,7 @@
 ;;; Code:
 (require 'req-package)
 
-(req-package org-clock
-  :force t
+(use-package org-clock
   :config
   ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
   (setq org-clock-history-length 23)

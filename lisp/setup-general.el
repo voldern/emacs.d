@@ -4,6 +4,13 @@
 (defvar dotfiles-dir)
 
 ;;; General
+;; Rebind keys on OSX
+(if (eq system-type 'darwin)
+    (setq mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier 'none))
+
 ;; Font
 (when (member "Source Code Pro Regular" (font-family-list))
   (add-to-list 'default-frame-alist '(font .  "Source Code Pro Regular-12")))
@@ -111,6 +118,10 @@
 
 ;; Use hippie expand
 (global-set-key "\M-/" 'hippie-expand)
+
+;; Uniquify buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 (provide 'setup-general)
 ;;; setup-general.el ends here

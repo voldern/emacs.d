@@ -3,8 +3,7 @@
 ;;; Code:
 (require 'req-package)
 
-(req-package org-agenda
-  :force t
+(use-package org-agenda
   :config
   ;; Disable default stuck mode
   (setq org-stuck-projects (quote ("" nil nil "")))

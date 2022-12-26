@@ -1,5 +1,6 @@
 (source gnu)
 (source melpa)
 
-(depends-on "pallet")
-(depends-on "req-package")
+(depends-on "use-package")
+(depends-on "diminish")
+(depends-on "bind-key")

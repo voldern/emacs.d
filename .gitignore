@@ -16,3 +16,9 @@ bookmarks
 org-clock-save.el
 savehist
 .cask
+straight
+transient
+lsp-cache
+.cache
+.lsp-session*
+recentf

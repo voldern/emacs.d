@@ -5,14 +5,17 @@
 
 ;; ;; Use twilight theme
 (use-package material-theme
+  :straight t
   :ensure t
   :config
   (load-theme 'material t))
 
-(use-package diminish)
+(use-package diminish
+  :straight t)
 
 ;; Dashboard
 (use-package dashboard
+  :straight t
   :ensure t
   :init
   (setq dashboard-projects-backend 'projectile)
@@ -21,29 +24,33 @@
 
 ;; Load exec paths from the shell
 (use-package exec-path-from-shell
+  :straight t
+  :ensure t
   :config
   (dolist (var '("PATH"))
     (add-to-list 'exec-path-from-shell-variables var))
   (setq exec-path-from-shell-arguments 'nil)
   (exec-path-from-shell-initialize))
 
-(exec-path-from-shell-initialize)
-
 (use-package keychain-environment
+  :straight t
   :config
   (keychain-refresh-environment))
 
 ;; Powerline
 (use-package smart-mode-line
+  :straight t
   :config
   (sml/setup))
 
 (use-package smart-mode-line-powerline-theme
+  :straight t
   :config
   (setq sml/theme 'smart-mode-line-powerline))
 
 ;; Undo tree
 (use-package undo-tree
+  :straight t
   :diminish undo-tree-mode
   :config
   (global-undo-tree-mode))
@@ -92,6 +99,7 @@
 
 ;; ;; Use git-gutter
 (use-package git-gutter-fringe
+  :straight t
   :if window-system
   :diminish 'git-gutter-mode
   :config
@@ -112,6 +120,7 @@
   (helm-autoresize-mode t))
 
 (use-package helm-rg
+  :straight t
   :ensure-system-package
   (rg . ripgrep))
 
@@ -130,16 +139,19 @@
 
 ;; ;; Use projectile and helm-projectile
 (use-package projectile
+  :straight t
   :config
   (projectile-global-mode t)
   (setq projectile-enable-caching t))
 
 (use-package helm-projectile
+  :straight t
   :bind (("C-c h" . helm-projectile)
          ("C-c p r" . helm-projectile-rg)))
 
 ;; Magit
 (use-package magit
+  :straight t
   :bind ("C-x g" . magit-status))
 
 ;; (use-package forge
@@ -164,10 +176,12 @@
 
 ;; Avy for fast jumping
 (use-package avy
+  :straight t
   :bind ("C-c j" . avy-goto-word-or-subword-1))
 
 ;; Use rainbow-delimiters to display unbalanced delimiters
 (use-package rainbow-delimiters
+  :straight t
   :hook prog-mode
   :config
   (set-face-attribute 'rainbow-delimiters-unmatched-face nil
@@ -176,6 +190,7 @@
 
 ;; Which key
 (use-package which-key
+  :straight t
   :config
   (which-key-mode t))
 
@@ -192,10 +207,12 @@
 
 ;; Expand region
 (use-package expand-region
+  :straight t
   :bind ("C-=" . er/expand-region))
 
 ;; Multiple cursor
 (use-package multiple-cursors
+  :straight t
   :bind (("C-c C-SPC" . set-rectangular-region-anchor)
          ("C-ø e" . mc/edit-lines)
          ("C-ø n" . mc/mark-next-like-this)
@@ -219,6 +236,7 @@
 
 ;; Company
 (use-package company
+  :straight t
   :ensure t
   :custom
   (company-idle-delay 0)
@@ -252,14 +270,17 @@
 
 
 (use-package company-quickhelp
+  :straight t
   :after company
   :init (company-quickhelp-mode))
 
 ;; Flycheck
 (use-package flycheck
+  :straight t
   :ensure t)
 
 (use-package helm-flycheck
+  :straight t
   :after flycheck
   :bind
   ("C-c ! h" . helm-flycheck))
@@ -304,23 +325,28 @@
 
 ;; Smartparens
 (use-package smartparens
+  :straight t
   :diminish smartparens-mode
   :config
   (require 'smartparens-config)
   (smartparens-global-mode t))
 
 ;; Rainbow
-(use-package rainbow-mode)
+(use-package rainbow-mode
+  :straight t)
 
 ;; Yaml mode
-(use-package yaml-mode)
+(use-package yaml-mode
+  :straight t)
 
 ;; Yasnippet
 (use-package yasnippet
+  :straight t
   :hook (prog-mode . yas-minor-mode))
 
 ;; LSP
 (use-package lsp-mode
+  :straight t
   :ensure t
   :commands lsp
   :hook (lsp-ui
@@ -345,6 +371,7 @@
      ("gopls.staticcheck" t t))))
 
 (use-package lsp-ui
+  :straight t
   :commands lsp-ui-mode
   :custom
   (lsp-ui-peek-always-show t)
@@ -352,10 +379,12 @@
   (lsp-ui-doc-enable nil))
 
 (use-package helm-xref
+  :straight t
   :ensure t
   :after helm)
 
 (use-package helm-lsp
+  :straight t
   :commands helm-lsp-workspace-symbol
   :bind (:map lsp-mode-map ([remap xref-find-apropos] . helm-lsp-workspace-symbol)))
 

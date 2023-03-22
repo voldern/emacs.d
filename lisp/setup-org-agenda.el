@@ -1,9 +1,8 @@
 ;;; setup-org.el --- org-mode agenda setup / options
 ;;; Commentary:
 ;;; Code:
-(require 'req-package)
-
 (use-package org-agenda
+  :straight t
   :config
   ;; Disable default stuck mode
   (setq org-stuck-projects (quote ("" nil nil "")))

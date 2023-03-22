@@ -1,38 +1,25 @@
 ;;; init.el --- Initial emacs configuration file
 ;;; Commentary:
 ;;; Code:
+(setq package-enable-at-startup nil)
 
-;;(require 'cask "/opt/homebrew/Cellar/cask/0.8.8/cask.el")
-;; (require 'cask "/usr/share/emacs/site-lisp/cask/cask.el")
-;;(cask-initialize)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(unless (package-installed-p 'quelpa)
-  (with-temp-buffer
-    (url-insert-file-contents "https://github.com/quelpa/quelpa/raw/master/quelpa.el")
-    (eval-buffer)
-    (quelpa-self-upgrade)))
-
-
-(eval-when-compile
-  (quelpa
-   '(quelpa-use-package
-     :fetcher git
-     :url "https://github.com/quelpa/quelpa-use-package.git"))
-  (require 'quelpa-use-package)
-  (require 'use-package-ensure))
-
-
-(setq use-package-always-ensure t)
+(straight-use-package 'use-package)
 
 (use-package use-package-ensure-system-package
+  :straight t
   :ensure t)
 
 ;; Load configurations

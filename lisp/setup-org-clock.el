@@ -1,9 +1,8 @@
 ;;; setup-org.el --- org-mode clock setup / options
 ;;; Commentary:
 ;;; Code:
-(require 'req-package)
-
 (use-package org-clock
+  :straight t
   :config
   ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
   (setq org-clock-history-length 23)

@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package typescript-mode
+  :straight t
   :after tree-sitter
   :config
   ;; we choose this instead of tsx-mode so that eglot can automatically figure out language for server
@@ -19,8 +20,8 @@
 ;; https://github.com/orzechowskid/tsi.el/
 ;; great tree-sitter-based indentation for typescript/tsx, css, json
 (use-package tsi
+  :straight (:host github :repo "orzechowskid/tsi.el")
   :after tree-sitter
-  :quelpa (tsi :fetcher github :repo "orzechowskid/tsi.el")
   ;; define autoload definitions which when actually invoked will cause package to be loaded
   :commands (tsi-typescript-mode tsi-json-mode tsi-css-mode)
   :init
@@ -128,7 +129,8 @@
 ;;   ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
 ;; )
 
-(use-package php-mode)
+(use-package php-mode
+  :straight t)
 
 (provide 'setup-web)
 ;;; setup-web.el ends here

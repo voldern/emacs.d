@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package rustic
+  :straight t
   :ensure
   :bind (:map rustic-mode-map
               ("M-j" . lsp-ui-imenu)

@@ -1,11 +1,11 @@
 ;;; setup-org.el --- org-mode setup / options
 ;;; Commentary:
 ;;; Code:
-(require 'req-package)
-
-(use-package org-bullets)
+(use-package org-bullets
+  :straight t)
 
 (use-package org
+  :straight t
   :init
   (setq org-directory "~/org")
   (setq org-agenda-files (quote ("~/org"

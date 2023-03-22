@@ -20,16 +20,18 @@
   (dashboard-setup-startup-hook))
 
 ;; Load exec paths from the shell
-(when (memq window-system '(mac ns x))
-  (use-package exec-path-from-shell
-    :config
-    ;; (dolist (var '("SSH_AGENT_PID" "SSH_AUTH_SOCK"))
-    ;;   (add-to-list 'exec-path-from-shell-variables var))
-    (setq exec-path-from-shell-arguments 'nil)
-    (exec-path-from-shell-initialize)))
+(use-package exec-path-from-shell
+  :config
+  (dolist (var '("PATH"))
+    (add-to-list 'exec-path-from-shell-variables var))
+  (setq exec-path-from-shell-arguments 'nil)
+  (exec-path-from-shell-initialize))
+
+(exec-path-from-shell-initialize)
 
 (use-package keychain-environment
-  :ensure t)
+  :config
+  (keychain-refresh-environment))
 
 ;; Powerline
 (use-package smart-mode-line

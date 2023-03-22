@@ -47,7 +47,7 @@
 (require 'setup-packages)
 (require 'setup-web)
 ;;(require 'setup-org)
-;;(require 'setup-rust)
+(require 'setup-rust)
 
 (provide 'init)
 ;;; init.el ends here
@@ -59,7 +59,8 @@
  '(custom-safe-themes
    '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
  '(package-selected-packages
-   '(keychain-environment yaml-mode which-key use-package-ensure-system-package undo-tree typescript-mode tsi tree-sitter-langs smartparens smart-mode-line-powerline-theme rustic rainbow-mode rainbow-delimiters racer quelpa-use-package multiple-cursors material-theme magit lsp-ui helm-xref helm-rg helm-projectile helm-lsp helm-flycheck graphql-mode git-gutter-fringe expand-region exec-path-from-shell diminish dashboard company-racer company-quickhelp avy apheleia aggressive-indent)))
+   '(go-mode terraform-mode dockerfile-mode php-mode yasnippet keychain-environment yaml-mode which-key use-package-ensure-system-package undo-tree typescript-mode tsi tree-sitter-langs smartparens smart-mode-line-powerline-theme rustic rainbow-mode rainbow-delimiters racer quelpa-use-package multiple-cursors material-theme magit lsp-ui helm-xref helm-rg helm-projectile helm-lsp helm-flycheck graphql-mode git-gutter-fringe expand-region exec-path-from-shell diminish dashboard company-racer company-quickhelp avy apheleia aggressive-indent))
+ '(warning-suppress-types '((lsp-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

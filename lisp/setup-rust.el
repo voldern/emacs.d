@@ -39,5 +39,5 @@
 ;;   :config
 ;;   (add-to-list 'company-backends 'company-racer))
 
-(provide 'setup-rust)¨
+(provide 'setup-rust)
 ;;; setup-rust.el ends here

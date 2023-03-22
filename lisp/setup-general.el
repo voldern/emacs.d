@@ -15,6 +15,11 @@
 (when (member "Source Code Pro Regular" (font-family-list))
   (add-to-list 'default-frame-alist '(font .  "Source Code Pro Regular-12")))
 
+;; Improve lsp performance
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024))
+
+
 ;; UTF-8 all the things
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)

@@ -128,5 +128,7 @@
 ;;   ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
 ;; )
 
+(use-package php-mode)
+
 (provide 'setup-web)
 ;;; setup-web.el ends here

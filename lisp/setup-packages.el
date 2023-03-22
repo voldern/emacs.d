@@ -324,7 +324,8 @@
   :ensure t
   :commands lsp
   :hook (lsp-ui
-         (typescript-mode . lsp))
+         (typescript-mode . lsp)
+         (php-mode . lsp))
   :init
   (setq lsp-keymap-prefix "C-c l")
   :custom

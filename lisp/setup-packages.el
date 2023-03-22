@@ -315,9 +315,9 @@
 ;; Yaml mode
 (use-package yaml-mode)
 
-;; ;; Yasnippet
-;; (use-package yasnippet
-;;   :hook (go-mode . yas-minor-mode))
+;; Yasnippet
+(use-package yasnippet
+  :hook (prog-mode . yas-minor-mode))
 
 ;; LSP
 (use-package lsp-mode
